@@ -88,15 +88,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = canvas.getContext('2d');
         let width, height;
         let particles = [];
+        let animationFrameId;
 
-        // Configuration
-        const particleCount = 80; // Number of nodes
-        const connectionDistance = 150;
+        // Configuration - Adaptive based on screen size
+        let particleCount = window.innerWidth < 768 ? 30 : 80;
+        const connectionDistance = window.innerWidth < 768 ? 100 : 150;
         const speed = 0.5;
 
         function resize() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            // Update particle count on resize
+            particleCount = window.innerWidth < 768 ? 30 : 80;
         }
 
         class Particle {
@@ -157,13 +160,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            requestAnimationFrame(animate);
+            animationFrameId = requestAnimationFrame(animate);
         }
 
         // Initialize
         window.addEventListener('resize', () => {
             resize();
             initParticles(); // Re-scatter on resize
+        });
+
+        // Optimization: Stop animation when tab is not visible
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                cancelAnimationFrame(animationFrameId);
+            } else {
+                animate();
+            }
         });
 
         resize();
