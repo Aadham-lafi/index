@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Check Star Fiber internet coverage in Erode. Search for your area in B.P. Agraharam, Perumal Malai, and more.">
+    <title>Service Availability | Star Fiber</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <canvas id="particles-js"></canvas>
+    <!-- Navigation -->
+    <nav class="glass-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Star<span class="highlight">Fiber</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="coverage.html" class="active">Coverage</a></li>
+                <li><a href="index.html#pricing">Plans</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+            </ul>
+            <a href="index.html#contact" class="btn btn-primary">Get Connected</a>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section-padding" style="padding-top: 150px;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Check Service <span class="highlight">Availability</span></h2>
+                <div class="underline"></div>
+                <p class="subheadline" style="margin-top: 20px;">Search for your area to see if Star Fiber is available
+                    at your location.</p>
+            </div>
+
+            <div class="search-wrapper">
+                <div class="search-box glass-panel">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="areaSearch" placeholder="Search for your area (e.g. Perumal Malai)...">
+                </div>
+            </div>
+
+            <div class="locations-grid" id="locationGrid"></div>
+
+            <div class="map-section glass-panel mt-5">
+                <h3>View on Map</h3>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3911.756295846358!2d77.7145!3d11.3428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba96f4da0470293%3A0x6e2c3c6f8497672!2sErode%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Star Fiber. All rights reserved. | <a href="#">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/917010034321" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const locations = [
+                { name: "B.P. Agraharam", area: "Erode", coverage: 30, status: "Filling Fast" },
+                { name: "Kamarajar Nagar", area: "Erode", coverage: 100, status: "Available" },
+                { name: "Thaneer Panthal Palayam", area: "Erode", coverage: 100, status: "Available" },
+                { name: "Palakatur", area: "Erode", coverage: 100, status: "Available" },
+                { name: "Amaravathi Nagar", area: "Erode", coverage: 100, status: "Available" },
+                { name: "RN Pudhur", area: "Erode", coverage: 100, status: "Available" },
+                { name: "Javuli Nagar", area: "Erode", coverage: 100, status: "Available" },
+                { name: "Police Quarters", area: "Erode", coverage: 100, status: "Available" },
+                { name: "Mayavaram", area: "Erode", coverage: 100, status: "Available" },
+                { name: "Perumal Malai", area: "Erode", coverage: 100, status: "Available" }
+            ];
+
+            const gridContainer = document.getElementById('locationGrid');
+            const searchInput = document.getElementById('areaSearch');
+
+            function renderLocations(filterText = '') {
+                if (!gridContainer) return;
+                gridContainer.innerHTML = '';
+
+                const filtered = locations.filter(loc =>
+                    loc.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                    loc.area.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                if (filtered.length === 0) {
+                    gridContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 40px;">No areas found. Contact us to check availability!</p>';
+                    return;
+                }
+
+                filtered.forEach(loc => {
+                    const card = document.createElement('div');
+                    card.className = 'location-card glass-panel';
+                    const statusClass = loc.coverage >= 100 ? 'status-available' : 'status-check';
+                    const statusText = loc.coverage >= 100 ? 'Available' : 'Filling Fast';
+
+                    card.innerHTML = `
+                        <div class="loc-header">
+                            <i class="fas fa-map-marker-alt loc-icon"></i>
+                            <div class="loc-info">
+                                <h4>${loc.name}</h4>
+                                <p>${loc.area}</p>
+                            </div>
+                        </div>
+                        <div class="coverage-display">
+                            <div class="coverage-label">
+                                <span>Coverage</span>
+                                <span class="coverage-percent">${loc.coverage}%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${loc.coverage}%"></div>
+                            </div>
+                        </div>
+                        <div class="status-badge ${statusClass}">${statusText}</div>
+                    `;
+                    gridContainer.appendChild(card);
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => renderLocations(e.target.value));
+            }
+
+            renderLocations();
+        });
+    </script>
+</body>
+
+</html>
