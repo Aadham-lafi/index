@@ -799,6 +799,54 @@ footer {
     .footer-grid {
         grid-template-columns: 1fr;
     }
+
+    /* About Section Mobile */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .about-text h3 {
+        font-size: 1.8rem;
+    }
+
+    .about-image {
+        height: 250px !important;
+        margin-top: 30px;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Enterprise Section Mobile */
+    .enterprise-banner {
+        padding: 30px 20px;
+    }
+
+    .enterprise-banner h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Footer Mobile */
+    .footer-top {
+        padding: 40px 0;
+    }
+
+    .footer-grid {
+        text-align: center;
+        gap: 30px;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    .footer-col h4 {
+        margin-bottom: 15px;
+    }
 }
 
 /* --- New Sections Styling --- */
