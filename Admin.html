@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Star Fiber</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0a0f1e; --bg-dark: #050810;
+            --primary-color: #00f3ff; --secondary-color: #0066ff;
+            --text-color: #ffffff; --text-muted: #a0a8b8;
+            --glass-bg: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.1);
+            --font-heading: 'Poppins', sans-serif; --font-body: 'Inter', sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background: var(--bg-color); color: var(--text-color); font-family: var(--font-body);
+            background-image: radial-gradient(circle at 10% 20%, rgba(0,102,255,0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0,243,255,0.1) 0%, transparent 40%); min-height:100vh; }
+
+        /* ===== SIDEBAR ===== */
+        .admin-layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+        @media (max-width: 768px) { .admin-layout { grid-template-columns: 1fr; } .sidebar { display: none; } }
+
+        .sidebar {
+            background: rgba(5,8,16,0.9); border-right: 1px solid var(--glass-border);
+            padding: 32px 20px; position: fixed; width: 260px; height: 100vh; overflow-y: auto;
+        }
+        .sidebar-logo { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 800; margin-bottom: 40px; display: block; }
+        .sidebar-logo span { color: var(--primary-color); }
+        .admin-badge { background: rgba(0,243,255,0.1); color: var(--primary-color); font-size: 0.7rem;
+            padding: 3px 10px; border-radius: 20px; font-weight: 700; margin-left: 8px; border: 1px solid rgba(0,243,255,0.3); }
+
+        .nav-section { margin-bottom: 32px; }
+        .nav-section-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 10px; padding: 0 12px; }
+        .nav-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+            border-radius: 12px; cursor: pointer; transition: all 0.3s;
+            color: var(--text-muted); font-size: 0.9rem; font-weight: 500; margin-bottom: 4px;
+        }
+        .nav-item:hover { background: var(--glass-bg); color: #fff; }
+        .nav-item.active { background: linear-gradient(90deg, rgba(0,102,255,0.2), rgba(0,243,255,0.1));
+            color: var(--primary-color); border: 1px solid rgba(0,243,255,0.2); }
+        .nav-item i { width: 20px; text-align: center; }
+
+        .sidebar-bottom { position: absolute; bottom: 24px; left: 20px; right: 20px; }
+        .logout-btn { display: flex; align-items: center; gap: 10px; padding: 12px 16px;
+            border-radius: 12px; border: 1px solid rgba(255,68,68,0.2); color: #ff6666;
+            cursor: pointer; font-size: 0.9rem; background: rgba(255,68,68,0.05);
+            transition: all 0.3s; width: 100%; font-family: var(--font-body); }
+        .logout-btn:hover { background: rgba(255,68,68,0.15); }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content { margin-left: 260px; padding: 32px; }
+        @media (max-width: 768px) { .main-content { margin-left: 0; padding: 20px; } }
+
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+        .page-title { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; }
+        .page-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
+
+        /* ===== GLASS PANEL ===== */
+        .glass { background: var(--glass-bg); backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); border-radius: 16px; }
+
+        /* ===== STATS GRID ===== */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 28px; }
+        @media (max-width: 1100px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } }
+
+        .stat-card { padding: 24px; border-radius: 16px; }
+        .stat-icon { width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 14px; font-size: 1.1rem; }
+        .stat-value { font-size: 2rem; font-weight: 800; font-family: var(--font-heading); }
+        .stat-label { color: var(--text-muted); font-size: 0.82rem; margin-top: 4px; }
+        .stat-trend { font-size: 0.78rem; margin-top: 8px; }
+
+        .stat-blue .stat-icon { background: rgba(0,102,255,0.15); color: var(--secondary-color); }
+        .stat-cyan .stat-icon { background: rgba(0,243,255,0.1); color: var(--primary-color); }
+        .stat-green .stat-icon { background: rgba(37,211,102,0.1); color: #25D366; }
+        .stat-orange .stat-icon { background: rgba(255,165,0,0.1); color: orange; }
+
+        /* ===== TWO COL ===== */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 28px; }
+        @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+        /* ===== SECTION ===== */
+        .section-card { padding: 24px; }
+        .section-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .section-hd h3 { font-size: 1rem; font-weight: 700; }
+        .view-all { font-size: 0.8rem; color: var(--primary-color); cursor: pointer; }
+        .view-all:hover { text-decoration: underline; }
+
+        /* ===== TABLE ===== */
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th { text-align: left; font-size: 0.75rem; color: var(--text-muted);
+            text-transform: uppercase; letter-spacing: 1px; padding: 10px 14px;
+            border-bottom: 1px solid var(--glass-border); font-weight: 600; }
+        .data-table td { padding: 14px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.88rem; }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; }
+        .dot-active { background: #25D366; }
+        .dot-expired { background: #ff4444; }
+        .dot-warning { background: orange; }
+
+        /* TABLE WRAPPER */
+        .table-wrap { overflow-x: auto; }
+
+        /* ===== SEARCH & FILTER BAR ===== */
+        .filter-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .filter-input {
+            background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 10px; padding: 10px 16px; color: #fff;
+            font-family: var(--font-body); font-size: 0.9rem; outline: none; transition: border-color 0.3s;
+        }
+        .filter-input:focus { border-color: var(--primary-color); }
+        .filter-input::placeholder { color: var(--text-muted); }
+        .filter-select { background: var(--glass-bg); border: 1px solid var(--glass-border);
+            border-radius: 10px; padding: 10px 16px; color: #fff;
+            font-family: var(--font-body); font-size: 0.9rem; outline: none; cursor: pointer; }
+        .filter-select option { background: #0a0f1e; }
+
+        .action-btn {
+            padding: 8px 16px; border-radius: 8px; border: none; cursor: pointer;
+            font-size: 0.8rem; font-weight: 600; font-family: var(--font-body); transition: all 0.2s;
+        }
+        .btn-primary-sm { background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); color: #000; }
+        .btn-primary-sm:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-danger-sm { background: rgba(255,68,68,0.15); color: #ff6666; border: 1px solid rgba(255,68,68,0.3); }
+        .btn-danger-sm:hover { background: rgba(255,68,68,0.25); }
+
+        /* ===== MODAL ===== */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .modal { background: #0d1226; border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 36px; width: 100%; max-width: 480px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5); position: relative; }
+        .modal h3 { font-size: 1.2rem; margin-bottom: 24px; }
+        .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none;
+            color: var(--text-muted); font-size: 1.2rem; cursor: pointer; }
+        .modal-close:hover { color: #fff; }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+        .form-control { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+            border-radius: 10px; padding: 12px 14px; color: #fff; font-family: var(--font-body);
+            font-size: 0.9rem; outline: none; transition: border-color 0.3s; }
+        .form-control:focus { border-color: var(--primary-color); }
+        .form-control::placeholder { color: var(--text-muted); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        /* ===== LOGIN ===== */
+        .admin-login { max-width: 420px; margin: 100px auto; padding: 48px 40px; text-align: center; }
+        .admin-login .logo-big { font-family: var(--font-heading); font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+        .admin-login h2 { font-size: 1.3rem; color: var(--text-muted); font-weight: 400; margin-bottom: 32px; }
+        .portal-btn { width: 100%; padding: 13px; border: none; border-radius: 12px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            color: #000; font-size: 1rem; font-weight: 700; font-family: var(--font-heading); cursor: pointer; transition: all 0.3s; }
+        .portal-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,243,255,0.3); }
+        .portal-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 13px 16px; color: #fff; font-size: 1rem;
+            font-family: var(--font-body); margin-bottom: 14px; outline: none; transition: border-color 0.3s; }
+        .portal-input:focus { border-color: var(--primary-color); }
+
+        /* ===== EXPIRING WIDGET ===== */
+        .expiring-item { display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .expiring-item:last-child { border-bottom: none; }
+        .exp-days { font-size: 0.8rem; font-weight: 700; padding: 3px 10px;
+            border-radius: 20px; background: rgba(255,165,0,0.1); color: orange; }
+
+        /* ===== PAGINATION ===== */
+        .pagination { display: flex; gap: 8px; justify-content: center; margin-top: 20px; }
+        .page-btn { padding: 8px 14px; border-radius: 8px; border: 1px solid var(--glass-border);
+            background: transparent; color: var(--text-muted); cursor: pointer; font-family: var(--font-body); font-size: 0.85rem; }
+        .page-btn.active { background: var(--secondary-color); border-color: var(--secondary-color); color: #fff; }
+        .page-btn:hover:not(.active) { border-color: var(--primary-color); color: #fff; }
+
+        /* ===== TOAST ===== */
+        .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 9999; }
+        .toast { background: rgba(10,15,30,0.97); border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px); border-radius: 12px; padding: 14px 20px;
+            color: #fff; font-weight: 500; display: flex; align-items: center; gap: 10px;
+            margin-top: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); animation: fadeIn 0.3s ease;
+            font-family: var(--font-body); font-size: 0.9rem; }
+        .toast.success { border-color: rgba(37,211,102,0.4); }
+        .toast.error { border-color: rgba(255,68,68,0.4); }
+        .toast.success i { color: #25D366; }
+        .toast.error i { color: #ff4444; }
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: none; } }
+
+        .hidden { display: none !important; }
+        .badge-pill { padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .badge-active { background: rgba(37,211,102,0.12); color: #25D366; }
+        .badge-expired { background: rgba(255,68,68,0.12); color: #ff4444; }
+        .empty-state { text-align: center; padding: 48px; color: var(--text-muted); }
+        .empty-state i { font-size: 2.5rem; opacity: 0.3; display: block; margin-bottom: 12px; }
+    </style>
+</head>
+<body>
+
+<!-- ===== ADMIN LOGIN ===== -->
+<div id="adminLogin">
+    <div class="glass admin-login">
+        <div class="logo-big">Star<span style="color:var(--primary-color)">Fiber</span></div>
+        <h2>Admin Dashboard</h2>
+        <input type="password" id="adminPass" class="portal-input" placeholder="Enter admin password" onkeypress="if(event.key==='Enter')adminLogin()">
+        <button class="portal-btn" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <p style="margin-top:16px;font-size:0.8rem;color:var(--text-muted);">For customer login → <a href="portal.html" style="color:var(--primary-color);">portal.html</a></p>
+    </div>
+</div>
+
+<!-- ===== ADMIN DASHBOARD ===== -->
+<div id="adminDashboard" class="hidden">
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <a href="#" class="sidebar-logo">Star<span>Fiber</span> <span class="admin-badge">ADMIN</span></a>
+
+            <div class="nav-section">
+                <div class="nav-section-label">Main</div>
+                <div class="nav-item active" onclick="showPage('dashboard')"><i class="fas fa-th-large"></i> Dashboard</div>
+                <div class="nav-item" onclick="showPage('customers')"><i class="fas fa-users"></i> Customers</div>
+                <div class="nav-item" onclick="showPage('leads')"><i class="fas fa-bell"></i> New Leads</div>
+                <div class="nav-item" onclick="showPage('collections')"><i class="fas fa-rupee-sign"></i> Collections</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-label">Actions</div>
+                <div class="nav-item" onclick="openAddModal()"><i class="fas fa-user-plus"></i> Add Customer</div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button class="logout-btn" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- ===== DASHBOARD PAGE ===== -->
+            <div id="page-dashboard">
+                <div class="page-header">
+                    <div>
+                        <div class="page-title">Dashboard</div>
+                        <div class="page-subtitle" id="dashTime">Loading...</div>
+                    </div>
+                    <button class="action-btn btn-primary-sm" onclick="loadDashboard()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="glass stat-card stat-blue">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-value" id="s-active">--</div>
+                        <div class="stat-label">Active Customers</div>
+                    </div>
+                    <div class="glass stat-card stat-orange">
+                        <div class="stat-icon"><i class="fas fa-exclamation-circle"></i></div>
+                        <div class="stat-value" id="s-expired">--</div>
+                        <div class="stat-label">Expired</div>
+                    </div>
+                    <div class="glass stat-card stat-green">
+                        <div class="stat-icon"><i class="fas fa-rupee-sign"></i></div>
+                        <div class="stat-value" id="s-collection">--</div>
+                        <div class="stat-label">Today's Collection</div>
+                    </div>
+                    <div class="glass stat-card stat-cyan">
+                        <div class="stat-icon"><i class="fas fa-bell"></i></div>
+                        <div class="stat-value" id="s-leads">--</div>
+                        <div class="stat-label">New Leads Today</div>
+                    </div>
+                </div>
+
+                <div class="two-col">
+                    <div class="glass section-card">
+                        <div class="section-hd">
+                            <h3>⚠️ Expiring in 3 Days</h3>
+                            <span class="view-all" onclick="showPage('customers')">View all →</span>
+                        </div>
+                        <div id="expiringList"><div class="empty-state"><i class="fas fa-check-circle"></i><p>No urgent renewals</p></div></div>
+                    </div>
+                    <div class="glass section-card">
+                        <div class="section-hd">
+                            <h3>📋 Recent Leads</h3>
+                            <span class="view-all" onclick="showPage('leads')">View all →</span>
+                        </div>
+                        <div id="recentLeadsList"><div class="empty-state"><i class="fas fa-bell"></i><p>No new leads</p></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CUSTOMERS PAGE ===== -->
+            <div id="page-customers" class="hidden">
+                <div class="page-header">
+                    <div><div class="page-title">Customers</div><div class="page-subtitle" id="custCount">Total: --</div></div>
+                    <button class="action-btn btn-primary-sm" onclick="openAddModal()"><i class="fas fa-plus"></i> Add Customer</button>
+                </div>
+                <div class="glass section-card">
+                    <div class="filter-bar">
+                        <input type="text" class="filter-input" id="custSearch" placeholder="🔍 Search name / mobile..." oninput="loadCustomers()">
+                        <select class="filter-select" id="custStatus" onchange="loadCustomers()">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="expired">Expired</option>
+                        </select>
+                    </div>
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Name</th><th>Mobile</th><th>Plan</th><th>Due Date</th><th>Status</th><th>Actions</th></tr>
+                            </thead>
+                            <tbody id="custTableBody"><tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted);">Loading...</td></tr></tbody>
+                        </table>
+                    </div>
+                    <div class="pagination" id="custPagination"></div>
+                </div>
+            </div>
+
+            <!-- ===== LEADS PAGE ===== -->
+            <div id="page-leads" class="hidden">
+                <div class="page-header">
+                    <div><div class="page-title">New Connection Leads</div></div>
+                    <button class="action-btn btn-primary-sm" onclick="loadLeads()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                </div>
+                <div class="glass section-card">
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead><tr><th>Name</th><th>Mobile</th><th>Area</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+                            <tbody id="leadsTableBody"><tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted);">Loading...</td></tr></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== COLLECTIONS PAGE ===== -->
+            <div id="page-collections" class="hidden">
+                <div class="page-header">
+                    <div><div class="page-title">Collections</div></div>
+                    <div style="display:flex;gap:10px;align-items:center;">
+                        <input type="date" class="filter-input" id="colFrom">
+                        <input type="date" class="filter-input" id="colTo">
+                        <button class="action-btn btn-primary-sm" onclick="loadCollections()">Filter</button>
+                    </div>
+                </div>
+                <div class="glass section-card" style="margin-bottom:20px;padding:24px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div><div style="color:var(--text-muted);font-size:0.85rem;margin-bottom:4px;">Total Collection</div>
+                        <div style="font-size:2.2rem;font-weight:800;color:var(--primary-color);">₹<span id="colTotal">0</span></div></div>
+                        <i class="fas fa-rupee-sign" style="font-size:3rem;opacity:0.1;"></i>
+                    </div>
+                </div>
+                <div class="glass section-card">
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead><tr><th>Customer</th><th>Mobile</th><th>Plan</th><th>Amount</th><th>Months</th><th>Date</th><th>Payment ID</th></tr></thead>
+                            <tbody id="colTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- ADD/EDIT CUSTOMER MODAL -->
+<div id="customerModal" class="modal-overlay hidden">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <h3 id="modalTitle">Add New Customer</h3>
+        <input type="hidden" id="editCustomerId">
+        <div class="form-row">
+            <div class="form-group"><label class="form-label">Full Name *</label><input type="text" class="form-control" id="f-name" placeholder="Customer name"></div>
+            <div class="form-group"><label class="form-label">Mobile Number *</label><input type="tel" class="form-control" id="f-mobile" placeholder="10-digit mobile" maxlength="10"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label class="form-label">Area</label><input type="text" class="form-control" id="f-area" placeholder="e.g. B.P. Agraharam"></div>
+            <div class="form-group"><label class="form-label">Plan Name *</label>
+                <select class="form-control" id="f-plan">
+                    <option value="Basic 50Mbps">Basic 50Mbps</option>
+                    <option value="Standard 100Mbps" selected>Standard 100Mbps</option>
+                    <option value="Pro 200Mbps">Pro 200Mbps</option>
+                    <option value="Ultra 500Mbps">Ultra 500Mbps</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label class="form-label">Monthly Price (₹) *</label><input type="number" class="form-control" id="f-price" placeholder="499" value="599"></div>
+            <div class="form-group"><label class="form-label">Speed</label><input type="text" class="form-control" id="f-speed" placeholder="100 Mbps"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Due Date *</label><input type="date" class="form-control" id="f-due"></div>
+        <div id="f-status-group" class="form-group hidden">
+            <label class="form-label">Status</label>
+            <select class="form-control" id="f-status"><option value="active">Active</option><option value="expired">Expired</option><option value="suspended">Suspended</option></select>
+        </div>
+        <button class="action-btn btn-primary-sm" style="width:100%;padding:14px;font-size:1rem;border-radius:12px;margin-top:8px;" onclick="saveCustomer()">
+            <i class="fas fa-save"></i> Save Customer
+        </button>
+    </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+const API = 'https://starfiber-backend.railway.app'; // ← Update after Railway deploy
+let adminToken = localStorage.getItem('sf_admin_token');
+let currentPage = 1;
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+    if (adminToken) showDashboard();
+    // Set today's date as default for collections
+    const today = new Date().toISOString().split('T')[0];
+    if (document.getElementById('colFrom')) document.getElementById('colFrom').value = today;
+    if (document.getElementById('colTo')) document.getElementById('colTo').value = today;
+    document.getElementById('dashTime').textContent = new Date().toLocaleString('en-IN', {timeZone:'Asia/Kolkata'});
+});
+
+// ===== AUTH =====
+async function adminLogin() {
+    const password = document.getElementById('adminPass').value;
+    if (!password) { showToast('Password enter பண்ணுங்க', 'error'); return; }
+    try {
+        const res = await fetch(`${API}/api/admin/login`, {
+            method: 'POST', headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+            localStorage.setItem('sf_admin_token', data.token);
+            adminToken = data.token;
+            showDashboard();
+        } else { showToast('Wrong password!', 'error'); }
+    } catch(e) { showToast('Server offline', 'error'); }
+}
+
+function showDashboard() {
+    document.getElementById('adminLogin').classList.add('hidden');
+    document.getElementById('adminDashboard').classList.remove('hidden');
+    loadDashboard();
+}
+
+function adminLogout() {
+    localStorage.removeItem('sf_admin_token');
+    adminToken = null;
+    document.getElementById('adminDashboard').classList.add('hidden');
+    document.getElementById('adminLogin').classList.remove('hidden');
+    document.getElementById('adminPass').value = '';
+}
+
+// ===== NAVIGATION =====
+function showPage(page) {
+    ['dashboard','customers','leads','collections'].forEach(p => {
+        document.getElementById(`page-${p}`).classList.toggle('hidden', p !== page);
+    });
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    event.currentTarget && event.currentTarget.classList.add('active');
+
+    if (page === 'customers') loadCustomers();
+    else if (page === 'leads') loadLeads();
+    else if (page === 'collections') loadCollections();
+    else loadDashboard();
+}
+
+// ===== DASHBOARD =====
+async function loadDashboard() {
+    try {
+        const res = await fetch(`${API}/api/admin/dashboard`, { headers: { 'Authorization': `Bearer ${adminToken}` } });
+        if (res.status === 401) { adminLogout(); return; }
+        const data = await res.json();
+
+        document.getElementById('s-active').textContent = data.stats.active;
+        document.getElementById('s-expired').textContent = data.stats.expired;
+        document.getElementById('s-collection').textContent = `₹${data.todayCollection.toLocaleString('en-IN')}`;
+        document.getElementById('s-leads').textContent = data.newLeadsToday;
+        document.getElementById('dashTime').textContent = new Date().toLocaleString('en-IN', {timeZone:'Asia/Kolkata'});
+
+        // Expiring list
+        const expList = document.getElementById('expiringList');
+        if (data.expiringSoon.length === 0) {
+            expList.innerHTML = '<div class="empty-state"><i class="fas fa-check-circle"></i><p>No urgent renewals</p></div>';
+        } else {
+            expList.innerHTML = data.expiringSoon.map(c => `
+                <div class="expiring-item">
+                    <div>
+                        <div style="font-weight:600;font-size:0.9rem;">${c.name}</div>
+                        <div style="color:var(--text-muted);font-size:0.8rem;">${c.mobile} • ${c.plan_name}</div>
+                    </div>
+                    <span class="exp-days">${Math.max(0,parseInt(c.days_left))}d left</span>
+                </div>`).join('');
+        }
+    } catch(e) { showToast('Dashboard load failed', 'error'); }
+}
+
+// ===== CUSTOMERS =====
+async function loadCustomers(page = 1) {
+    currentPage = page;
+    const search = document.getElementById('custSearch').value;
+    const status = document.getElementById('custStatus').value;
+    try {
+        const res = await fetch(`${API}/api/admin/customers?search=${search}&status=${status}&page=${page}`,
+            { headers: { 'Authorization': `Bearer ${adminToken}` } });
+        const data = await res.json();
+        document.getElementById('custCount').textContent = `Total: ${data.total}`;
+
+        const tbody = document.getElementById('custTableBody');
+        if (data.customers.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted);">No customers found</td></tr>';
+            return;
+        }
+        tbody.innerHTML = data.customers.map(c => {
+            const daysLeft = parseInt(c.days_remaining);
+            const statusBadge = c.status === 'active'
+                ? `<span class="badge-pill badge-active">Active</span>`
+                : `<span class="badge-pill badge-expired">Expired</span>`;
+            const dueColor = daysLeft <= 3 ? 'color:orange;' : daysLeft <= 0 ? 'color:#ff4444;' : '';
+            return `<tr>
+                <td><span style="font-weight:600;">${c.name}</span></td>
+                <td>${c.mobile}</td>
+                <td>${c.plan_name || '--'} <br><small style="color:var(--text-muted)">₹${c.plan_price}/mo</small></td>
+                <td style="${dueColor}">${new Date(c.due_date).toLocaleDateString('en-IN')}<br><small style="color:var(--text-muted)">${Math.max(0,daysLeft)}d left</small></td>
+                <td>${statusBadge}</td>
+                <td><button class="action-btn btn-primary-sm" onclick="editCustomer(${c.id})" style="margin-right:6px;">Edit</button>
+                    <button class="action-btn btn-danger-sm" onclick="deleteCustomer(${c.id},'${c.name}')">Del</button></td>
+            </tr>`;
+        }).join('');
+
+        // Pagination
+        const pag = document.getElementById('custPagination');
+        pag.innerHTML = '';
+        for (let i = 1; i <= data.pages; i++) {
+            const btn = document.createElement('button');
+            btn.className = `page-btn ${i === page ? 'active' : ''}`;
+            btn.textContent = i;
+            btn.onclick = () => loadCustomers(i);
+            pag.appendChild(btn);
+        }
+    } catch(e) { showToast('Failed to load customers', 'error'); }
+}
+
+// ===== ADD/EDIT MODAL =====
+function openAddModal() {
+    document.getElementById('modalTitle').textContent = 'Add New Customer';
+    document.getElementById('editCustomerId').value = '';
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-mobile').value = '';
+    document.getElementById('f-area').value = '';
+    document.getElementById('f-price').value = '599';
+    document.getElementById('f-speed').value = '100 Mbps';
+    document.getElementById('f-status-group').classList.add('hidden');
+    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 30);
+    document.getElementById('f-due').value = tomorrow.toISOString().split('T')[0];
+    document.getElementById('customerModal').classList.remove('hidden');
+}
+
+async function editCustomer(id) {
+    try {
+        const res = await fetch(`${API}/api/admin/customers?search=`, { headers: { 'Authorization': `Bearer ${adminToken}` } });
+        const data = await res.json();
+        const c = data.customers.find(x => x.id === id);
+        if (!c) return;
+        document.getElementById('modalTitle').textContent = 'Edit Customer';
+        document.getElementById('editCustomerId').value = id;
+        document.getElementById('f-name').value = c.name;
+        document.getElementById('f-mobile').value = c.mobile;
+        document.getElementById('f-area').value = c.area || '';
+        document.getElementById('f-plan').value = c.plan_name;
+        document.getElementById('f-price').value = c.plan_price;
+        document.getElementById('f-speed').value = c.plan_speed || '';
+        document.getElementById('f-due').value = c.due_date?.split('T')[0];
+        document.getElementById('f-status').value = c.status;
+        document.getElementById('f-status-group').classList.remove('hidden');
+        document.getElementById('customerModal').classList.remove('hidden');
+    } catch(e) { showToast('Failed to load customer', 'error'); }
+}
+
+async function saveCustomer() {
+    const id = document.getElementById('editCustomerId').value;
+    const body = {
+        name: document.getElementById('f-name').value,
+        mobile: document.getElementById('f-mobile').value,
+        area: document.getElementById('f-area').value,
+        plan_name: document.getElementById('f-plan').value,
+        plan_price: parseInt(document.getElementById('f-price').value),
+        plan_speed: document.getElementById('f-speed').value,
+        due_date: document.getElementById('f-due').value,
+        status: id ? document.getElementById('f-status').value : 'active'
+    };
+    if (!body.name || !body.mobile || !body.due_date) { showToast('Name, Mobile, Due date required', 'error'); return; }
+
+    try {
+        const res = await fetch(`${API}/api/admin/customers${id ? '/'+id : ''}`, {
+            method: id ? 'PATCH' : 'POST',
+            headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${adminToken}` },
+            body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (res.ok) {
+            showToast(id ? 'Customer updated!' : 'Customer added! WhatsApp sent ✅', 'success');
+            closeModal(); loadCustomers();
+        } else { showToast(data.error || 'Save failed', 'error'); }
+    } catch(e) { showToast('Server error', 'error'); }
+}
+
+async function deleteCustomer(id, name) {
+    if (!confirm(`Delete ${name}? This cannot be undone.`)) return;
+    try {
+        await fetch(`${API}/api/admin/customers/${id}`, {
+            method: 'DELETE', headers: { 'Authorization': `Bearer ${adminToken}` }
+        });
+        showToast('Customer deleted', 'success');
+        loadCustomers();
+    } catch(e) { showToast('Delete failed', 'error'); }
+}
+
+function closeModal() { document.getElementById('customerModal').classList.add('hidden'); }
+
+// ===== LEADS =====
+async function loadLeads() {
+    try {
+        const res = await fetch(`${API}/api/leads`, { headers: { 'Authorization': `Bearer ${adminToken}` } });
+        const data = await res.json();
+        const tbody = document.getElementById('leadsTableBody');
+        if (!data.leads?.length) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted);">No leads yet</td></tr>';
+            return;
+        }
+        tbody.innerHTML = data.leads.map(l => `<tr>
+            <td style="font-weight:600;">${l.name}</td>
+            <td><a href="tel:${l.mobile}" style="color:var(--primary-color);">${l.mobile}</a></td>
+            <td>${l.area || '--'}</td>
+            <td style="color:var(--text-muted);font-size:0.8rem;">${new Date(l.created_at).toLocaleString('en-IN')}</td>
+            <td><span class="badge-pill ${l.status==='new'?'badge-active':'badge-expired'}">${l.status}</span></td>
+            <td>
+                <a href="https://wa.me/91${l.mobile}" target="_blank" class="action-btn btn-primary-sm" style="text-decoration:none;display:inline-block;">
+                    <i class="fab fa-whatsapp"></i> Call
+                </a>
+            </td>
+        </tr>`).join('');
+    } catch(e) { showToast('Failed to load leads', 'error'); }
+}
+
+// ===== COLLECTIONS =====
+async function loadCollections() {
+    const from = document.getElementById('colFrom').value;
+    const to = document.getElementById('colTo').value;
+    try {
+        const res = await fetch(`${API}/api/admin/collections?from=${from}&to=${to}`, { headers: { 'Authorization': `Bearer ${adminToken}` } });
+        const data = await res.json();
+        document.getElementById('colTotal').textContent = data.total?.toLocaleString('en-IN') || '0';
+        const tbody = document.getElementById('colTableBody');
+        if (!data.payments?.length) {
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--text-muted);">No collections found</td></tr>';
+            return;
+        }
+        tbody.innerHTML = data.payments.map(p => `<tr>
+            <td style="font-weight:600;">${p.customer_name}</td>
+            <td>${p.mobile}</td>
+            <td>${p.plan_name || '--'}</td>
+            <td style="color:#25D366;font-weight:700;">₹${p.amount}</td>
+            <td>${p.months} mo</td>
+            <td style="color:var(--text-muted);font-size:0.8rem;">${new Date(p.payment_date).toLocaleString('en-IN')}</td>
+            <td style="font-size:0.75rem;color:var(--text-muted);">${p.razorpay_payment_id || 'Cash'}</td>
+        </tr>`).join('');
+    } catch(e) { showToast('Failed to load collections', 'error'); }
+}
+
+// ===== TOAST =====
+function showToast(msg, type = 'success') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i> ${msg}`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+}
+</script>
+</body>
+</html>
