@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-const SUPABASE_URL = 'https://efreyrgwtaijfkjevvbc.supabase.co';
-const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmcmV5cmd3dGFpamZramV2dmJjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4MDM5MjAsImV4cCI6MjA4ODM3OTkyMH0.Ec073kKPEboT401ToIZCMAOliZQnEwbLUIqRj2O7IUo';
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account | Star Fiber</title>
@@ -13,133 +9,36 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== PORTAL SPECIFIC STYLES ===== */
-        .portal-wrapper {
-            min-height: 100vh;
-            padding-top: 100px;
-            padding-bottom: 60px;
-        }
-
-        /* LOGIN CARD */
-        .login-card {
-            max-width: 440px;
-            margin: 60px auto;
-            padding: 48px 40px;
-            text-align: center;
-        }
-        .login-card .portal-icon {
-            width: 72px; height: 72px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 1.8rem; color: #000;
-        }
+        .portal-wrapper { min-height: 100vh; padding-top: 100px; padding-bottom: 60px; }
+        .login-card { max-width: 440px; margin: 60px auto; padding: 48px 40px; text-align: center; }
+        .login-card .portal-icon { width: 72px; height: 72px; background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 1.8rem; color: #000; }
         .login-card h2 { font-size: 1.8rem; margin-bottom: 8px; }
         .login-card p { color: var(--text-muted); margin-bottom: 32px; font-size: 0.95rem; }
-
-        /* FORM INPUTS */
-        .portal-input {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 14px 18px;
-            color: #fff;
-            font-size: 1rem;
-            font-family: var(--font-body);
-            margin-bottom: 16px;
-            transition: border-color 0.3s;
-            outline: none;
-        }
+        .portal-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 12px; padding: 14px 18px; color: #fff; font-size: 1rem; font-family: var(--font-body); margin-bottom: 16px; transition: border-color 0.3s; outline: none; }
         .portal-input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(0,243,255,0.1); }
         .portal-input::placeholder { color: var(--text-muted); }
-
-        .portal-btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            font-family: var(--font-heading);
-            cursor: pointer;
-            transition: all 0.3s;
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-            color: #000;
-            margin-bottom: 12px;
-        }
+        .portal-btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; font-family: var(--font-heading); cursor: pointer; transition: all 0.3s; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); color: #000; margin-bottom: 12px; }
         .portal-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,243,255,0.3); }
         .portal-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .portal-btn.outline {
-            background: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-        }
+        .portal-btn.outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
         .portal-btn.outline:hover { background: rgba(0,243,255,0.1); color: #fff; }
-
         .otp-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 8px; }
         .otp-timer { color: var(--primary-color); font-weight: 600; }
-
-        /* DASHBOARD */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 340px 1fr;
-            gap: 24px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        .dashboard-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; max-width: 1100px; margin: 0 auto; }
         @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
-
-        /* PLAN CARD */
-        .plan-card {
-            padding: 32px;
-            text-align: center;
-            position: relative;
-        }
-        .plan-card .avatar {
-            width: 64px; height: 64px;
-            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 16px;
-            font-size: 1.5rem; color: #000;
-        }
+        .plan-card { padding: 32px; text-align: center; position: relative; }
+        .plan-card .avatar { width: 64px; height: 64px; background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.5rem; color: #000; }
         .plan-card .customer-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
         .plan-card .customer-mobile { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-
-        .plan-info-box {
-            background: rgba(0,102,255,0.08);
-            border: 1px solid rgba(0,102,255,0.2);
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .plan-speed-display {
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1;
-        }
+        .plan-info-box { background: rgba(0,102,255,0.08); border: 1px solid rgba(0,102,255,0.2); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
+        .plan-speed-display { font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
         .plan-name-display { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
         .plan-price-display { font-size: 1.5rem; font-weight: 700; margin-top: 10px; }
         .plan-price-display span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
-
-        /* STATUS BADGE */
-        .status-pill {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 8px 18px; border-radius: 30px;
-            font-size: 0.85rem; font-weight: 600;
-            margin-bottom: 20px;
-        }
+        .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
         .status-pill.active { background: rgba(37,211,102,0.12); color: #25D366; border: 1px solid rgba(37,211,102,0.25); }
         .status-pill.expired { background: rgba(255,68,68,0.12); color: #ff4444; border: 1px solid rgba(255,68,68,0.25); }
         .status-pill.warning { background: rgba(255,165,0,0.12); color: orange; border: 1px solid rgba(255,165,0,0.25); }
-
-        /* DUE DATE COUNTDOWN */
         .due-section { margin-bottom: 20px; }
         .due-label { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 6px; }
         .due-date-big { font-size: 1.1rem; font-weight: 600; }
@@ -150,109 +49,52 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         .days-bar-fill.warn { background: linear-gradient(90deg, orange, #ffcc00); }
         .days-bar-fill.danger { background: linear-gradient(90deg, #ff4444, #ff8800); }
         .days-remaining-text { font-size: 0.82rem; color: var(--text-muted); margin-top: 5px; text-align: right; }
-
-        /* RIGHT PANEL TABS */
         .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab-btn {
-            padding: 8px 20px; border-radius: 30px; border: 1px solid var(--glass-border);
-            background: transparent; color: var(--text-muted);
-            font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
-            cursor: pointer; transition: all 0.3s;
-        }
-        .tab-btn.active {
-            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-            border-color: transparent; color: #000; font-weight: 700;
-        }
+        .tab-btn { padding: 8px 20px; border-radius: 30px; border: 1px solid var(--glass-border); background: transparent; color: var(--text-muted); font-family: var(--font-body); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.3s; }
+        .tab-btn.active { background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); border-color: transparent; color: #000; font-weight: 700; }
         .tab-btn:hover:not(.active) { border-color: var(--primary-color); color: #fff; }
-
         .tab-panel { display: none; }
         .tab-panel.active { display: block; }
-
-        /* RENEW SECTION */
         .renew-card { padding: 28px; }
         .renew-card h3 { font-size: 1.2rem; margin-bottom: 20px; }
         .months-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-        .month-option {
-            padding: 16px 10px; text-align: center; border-radius: 12px;
-            border: 1px solid var(--glass-border); cursor: pointer; transition: all 0.3s;
-        }
+        .month-option { padding: 16px 10px; text-align: center; border-radius: 12px; border: 1px solid var(--glass-border); cursor: pointer; transition: all 0.3s; }
         .month-option:hover { border-color: var(--primary-color); }
         .month-option.selected { border-color: var(--primary-color); background: rgba(0,243,255,0.08); }
         .month-option .mo-count { font-size: 1.4rem; font-weight: 700; }
         .month-option .mo-label { font-size: 0.75rem; color: var(--text-muted); }
         .month-option .mo-price { font-size: 0.9rem; color: var(--primary-color); font-weight: 600; margin-top: 4px; }
         .month-option .mo-save { font-size: 0.7rem; color: #25D366; }
-
-        .total-box {
-            background: rgba(0,102,255,0.08); border: 1px solid rgba(0,102,255,0.2);
-            border-radius: 12px; padding: 16px 20px;
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 20px;
-        }
+        .total-box { background: rgba(0,102,255,0.08); border: 1px solid rgba(0,102,255,0.2); border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .total-box .label { color: var(--text-muted); font-size: 0.9rem; }
         .total-box .amount { font-size: 1.6rem; font-weight: 700; color: var(--primary-color); }
-
-        /* PAYMENT HISTORY */
-        .payment-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 0; border-bottom: 1px solid var(--glass-border);
-        }
+        .payment-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--glass-border); }
         .payment-item:last-child { border-bottom: none; }
         .pay-left { display: flex; align-items: center; gap: 14px; }
-        .pay-icon {
-            width: 40px; height: 40px; border-radius: 10px;
-            background: rgba(37,211,102,0.1); display: flex; align-items: center; justify-content: center;
-            color: #25D366; font-size: 1rem;
-        }
+        .pay-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(37,211,102,0.1); display: flex; align-items: center; justify-content: center; color: #25D366; font-size: 1rem; }
         .pay-title { font-weight: 600; font-size: 0.95rem; }
         .pay-date { font-size: 0.8rem; color: var(--text-muted); }
         .pay-amount { font-weight: 700; color: #25D366; }
         .pay-id { font-size: 0.75rem; color: var(--text-muted); }
-
-        /* REFERRAL CARD */
-        .referral-code-box {
-            background: linear-gradient(135deg, rgba(0,102,255,0.1), rgba(0,243,255,0.1));
-            border: 1px solid rgba(0,243,255,0.2);
-            border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 20px;
-        }
+        .referral-code-box { background: linear-gradient(135deg, rgba(0,102,255,0.1), rgba(0,243,255,0.1)); border: 1px solid rgba(0,243,255,0.2); border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 20px; }
         .ref-code { font-size: 2rem; font-weight: 800; letter-spacing: 4px; color: var(--primary-color); }
         .ref-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; }
-        .copy-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 8px 20px; border-radius: 30px; border: 1px solid var(--primary-color);
-            background: transparent; color: var(--primary-color);
-            font-size: 0.85rem; cursor: pointer; transition: all 0.3s; margin-top: 12px;
-            font-family: var(--font-body);
-        }
+        .copy-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 30px; border: 1px solid var(--primary-color); background: transparent; color: var(--primary-color); font-size: 0.85rem; cursor: pointer; transition: all 0.3s; margin-top: 12px; font-family: var(--font-body); }
         .copy-btn:hover { background: rgba(0,243,255,0.1); }
-
         .ref-apply-section { margin-top: 24px; }
         .ref-apply-section h4 { font-size: 1rem; margin-bottom: 12px; }
         .ref-input-group { display: flex; gap: 10px; }
         .ref-input-group input { flex: 1; }
-
-        /* TOAST */
         .toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 9999; }
-        .toast {
-            background: rgba(10,15,30,0.95); border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px); border-radius: 12px;
-            padding: 14px 24px; color: #fff; font-weight: 500;
-            display: flex; align-items: center; gap: 10px;
-            animation: slideUp 0.3s ease; margin-top: 8px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-        }
+        .toast { background: rgba(10,15,30,0.95); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); border-radius: 12px; padding: 14px 24px; color: #fff; font-weight: 500; display: flex; align-items: center; gap: 10px; animation: slideUp 0.3s ease; margin-top: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
         .toast.success { border-color: rgba(37,211,102,0.4); }
         .toast.error { border-color: rgba(255,68,68,0.4); }
         .toast i { font-size: 1.1rem; }
         .toast.success i { color: #25D366; }
         .toast.error i { color: #ff4444; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* EMPTY STATE */
         .empty-state { text-align: center; padding: 48px 24px; color: var(--text-muted); }
         .empty-state i { font-size: 3rem; opacity: 0.3; margin-bottom: 16px; display: block; }
-
-        /* SECTION HIDDEN */
         .hidden { display: none !important; }
     </style>
 </head>
@@ -279,12 +121,12 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         <!-- ===== LOGIN SECTION ===== -->
         <div id="loginSection">
 
-            <!-- Step 1: Enter Mobile -->
+            <!-- Step 1: Enter Email -->
             <div id="step1" class="glass-panel login-card">
                 <div class="portal-icon"><i class="fas fa-wifi"></i></div>
                 <h2>Customer <span class="highlight">Portal</span></h2>
                 <p>Enter your registered email address to login</p>
-                <input type="email" id="emailInput" class="portal-input" placeholder="Your Email Address (e.g. name@gmail.com)">
+                <input type="email" id="emailInput" class="portal-input" placeholder="Your Email (e.g. name@gmail.com)">
                 <button class="portal-btn" id="sendOtpBtn" onclick="sendOTP()">
                     <i class="fas fa-paper-plane"></i> Send OTP
                 </button>
@@ -321,18 +163,15 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
                         <div class="avatar"><i class="fas fa-user"></i></div>
                         <div class="customer-name" id="d-name">Loading...</div>
                         <div class="customer-mobile" id="d-mobile"></div>
-
                         <div id="d-status-pill" class="status-pill active">
                             <i class="fas fa-circle" style="font-size:0.5rem;"></i>
                             <span id="d-status-text">Active</span>
                         </div>
-
                         <div class="plan-info-box">
                             <div class="plan-speed-display" id="d-speed">--</div>
                             <div class="plan-name-display" id="d-plan-name">--</div>
                             <div class="plan-price-display" id="d-price">₹-- <span>/month</span></div>
                         </div>
-
                         <div class="due-section">
                             <div class="due-label">Next Due Date</div>
                             <div class="due-date-big" id="d-due-date">--</div>
@@ -343,9 +182,7 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
                                 <div class="days-remaining-text" id="d-days-text">-- days remaining</div>
                             </div>
                         </div>
-
                         <p id="d-status-msg" style="font-size:0.85rem;color:var(--text-muted);margin-bottom:20px;"></p>
-
                         <button class="portal-btn" onclick="switchTab('renew')" id="renewNowBtn">
                             <i class="fas fa-sync-alt"></i> Renew Now
                         </button>
@@ -367,9 +204,7 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
                     <div id="tab-renew" class="tab-panel active glass-panel renew-card">
                         <h3>Renew Your Plan</h3>
                         <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Select number of months to renew:</p>
-                        <div class="months-grid" id="monthsGrid">
-                            <!-- Filled by JS -->
-                        </div>
+                        <div class="months-grid" id="monthsGrid"></div>
                         <div class="total-box">
                             <div><div class="label">Total Amount</div><div style="font-size:0.8rem;color:var(--text-muted)" id="discountNote"></div></div>
                             <div class="amount" id="totalAmount">₹0</div>
@@ -394,7 +229,6 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
                     <div id="tab-referral" class="tab-panel glass-panel" style="padding:28px;">
                         <h3 style="margin-bottom:8px;">Refer & Earn</h3>
                         <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Share your code — both you & your friend get ₹100 off!</p>
-
                         <div class="referral-code-box">
                             <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px;">YOUR REFERRAL CODE</div>
                             <div class="ref-code" id="refCode">------</div>
@@ -403,7 +237,6 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
                                 <i class="fas fa-copy"></i> Copy Code
                             </button>
                         </div>
-
                         <div style="background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);border-radius:12px;padding:16px;margin-bottom:20px;">
                             <div style="display:flex;gap:12px;align-items:flex-start;">
                                 <i class="fas fa-users" style="color:#25D366;font-size:1.2rem;margin-top:2px;"></i>
@@ -413,7 +246,6 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
                                 </div>
                             </div>
                         </div>
-
                         <div class="ref-apply-section">
                             <h4>Have a referral code?</h4>
                             <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:14px;">Apply a friend's code to get ₹100 off your next renewal</p>
@@ -428,41 +260,38 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         </div>
     </div>
 
-    <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- WhatsApp Float -->
     <a href="https://wa.me/917010034321" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Razorpay SDK -->
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="script.js"></script>
     <script>
-    // ===== CONFIG =====
-    const API = 'https://starfiber-backend.railway.app'; // ← Update after Railway deploy
+    const API = 'https://starfiber-backend.railway.app'; // ← Railway deploy ஆனதும் update பண்ணுங்க
     let authToken = localStorage.getItem('sf_token');
     let customerData = null;
     let selectedMonths = 1;
     let otpTimer = null;
 
-    // ===== INIT =====
     document.addEventListener('DOMContentLoaded', () => {
         if (authToken) loadDashboard();
 
-        // Enter key support
-        document.getElementById('mobileInput').addEventListener('keypress', e => { if(e.key==='Enter') sendOTP(); });
+        // ✅ FIX 1: emailInput (mobileInput இல்லை)
+        document.getElementById('emailInput').addEventListener('keypress', e => { if(e.key==='Enter') sendOTP(); });
         document.getElementById('otpInput').addEventListener('keypress', e => { if(e.key==='Enter') verifyOTP(); });
         document.getElementById('otpInput').addEventListener('input', e => {
             e.target.value = e.target.value.replace(/[^0-9]/g,'').slice(0,6);
         });
     });
 
-    // ===== AUTH FUNCTIONS =====
+    // ✅ FIX 2: sendOTP — email use பண்றோம்
     async function sendOTP() {
-        const mobile = document.getElementById('mobileInput').value.trim();
-        if (!/^[6-9]\d{9}$/.test(mobile)) { showToast('Valid 10-digit mobile number enter பண்ணுங்க', 'error'); return; }
+        const email = document.getElementById('emailInput').value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showToast('Valid email address enter பண்ணுங்க', 'error'); return;
+        }
 
         const btn = document.getElementById('sendOtpBtn');
         btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
@@ -470,15 +299,17 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         try {
             const res = await fetch(`${API}/api/auth/send-otp`, {
                 method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ mobile })
+                body: JSON.stringify({ email })
             });
             const data = await res.json();
             if (res.ok) {
                 document.getElementById('step1').classList.add('hidden');
                 document.getElementById('step2').classList.remove('hidden');
-                document.getElementById('otpSentMsg').textContent = `OTP sent to ${mobile.slice(0,5)}XXXXX`;
+                // Mask email: name@gmail.com → na***@gmail.com
+                const [user, domain] = email.split('@');
+                document.getElementById('otpSentMsg').textContent = `OTP sent to ${user.slice(0,2)}***@${domain}`;
                 startTimer();
-                showToast('OTP sent successfully!', 'success');
+                showToast('OTP sent! Check your email inbox 📧', 'success');
             } else {
                 showToast(data.error || 'Failed to send OTP', 'error');
                 btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
@@ -489,8 +320,9 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         }
     }
 
+    // ✅ FIX 3: verifyOTP — email use பண்றோம்
     async function verifyOTP() {
-        const mobile = document.getElementById('mobileInput').value.trim();
+        const email = document.getElementById('emailInput').value.trim();
         const otp = document.getElementById('otpInput').value.trim();
         if (otp.length !== 6) { showToast('6-digit OTP enter பண்ணுங்க', 'error'); return; }
 
@@ -500,7 +332,7 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         try {
             const res = await fetch(`${API}/api/auth/verify-otp`, {
                 method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ mobile, otp })
+                body: JSON.stringify({ email, otp })
             });
             const data = await res.json();
             if (res.ok) {
@@ -535,19 +367,18 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
     function startTimer() {
         let seconds = 60;
         document.getElementById('timerDisplay').textContent = `${seconds}s`;
-        document.getElementById('timerDisplay').parentElement.style.display = 'block';
         document.getElementById('resendBtn').classList.add('hidden');
         otpTimer = setInterval(() => {
             seconds--;
             document.getElementById('timerDisplay').textContent = `${seconds}s`;
             if (seconds <= 0) {
                 clearInterval(otpTimer);
-                document.getElementById('timerDisplay').parentElement.style.display = 'none';
                 document.getElementById('resendBtn').classList.remove('hidden');
             }
         }, 1000);
     }
 
+    // ✅ FIX 4: logout — emailInput clear பண்றோம்
     function logout() {
         localStorage.removeItem('sf_token');
         authToken = null; customerData = null;
@@ -555,12 +386,11 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         document.getElementById('loginSection').classList.remove('hidden');
         document.getElementById('step1').classList.remove('hidden');
         document.getElementById('step2').classList.add('hidden');
-        document.getElementById('mobileInput').value = '';
+        document.getElementById('emailInput').value = '';
         document.getElementById('otpInput').value = '';
         showToast('Logged out successfully', 'success');
     }
 
-    // ===== DASHBOARD =====
     async function loadDashboard() {
         try {
             const res = await fetch(`${API}/api/customer/profile`, {
@@ -570,13 +400,11 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
             const data = await res.json();
             customerData = data.customer;
 
-            // Show dashboard
             document.getElementById('loginSection').classList.add('hidden');
             document.getElementById('dashboardSection').classList.remove('hidden');
 
-            // Fill data
             document.getElementById('d-name').textContent = customerData.name;
-            document.getElementById('d-mobile').textContent = `+91 ${customerData.mobile}`;
+            document.getElementById('d-mobile').textContent = customerData.email || customerData.mobile;
             document.getElementById('d-speed').textContent = customerData.plan_speed || '--';
             document.getElementById('d-plan-name').textContent = customerData.plan_name || '--';
             document.getElementById('d-price').innerHTML = `₹${customerData.plan_price} <span>/month</span>`;
@@ -585,7 +413,6 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
             document.getElementById('refCode').textContent = customerData.referral_code || '------';
             document.getElementById('refCount').textContent = customerData.referral_count || 0;
 
-            // Status pill
             const daysLeft = parseInt(customerData.days_remaining);
             const pill = document.getElementById('d-status-pill');
             const pillText = document.getElementById('d-status-text');
@@ -597,19 +424,13 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
                 pill.className = 'status-pill active'; pillText.textContent = 'Active';
             }
 
-            // Days bar
             const bar = document.getElementById('d-days-bar');
-            const barPct = Math.min(100, (daysLeft / 30) * 100);
-            bar.style.width = `${barPct}%`;
+            bar.style.width = `${Math.min(100, (daysLeft / 30) * 100)}%`;
             bar.className = `days-bar-fill ${daysLeft > 10 ? 'good' : daysLeft > 3 ? 'warn' : 'danger'}`;
             document.getElementById('d-days-text').textContent = `${daysLeft} days remaining`;
 
-            // Build months grid
             buildMonthsGrid(customerData.plan_price, customerData.referral_discount);
-
-            // Load payments
             loadPayments();
-
         } catch(e) {
             showToast('Failed to load profile. Please login again.', 'error');
             logout();
@@ -628,7 +449,7 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         options.forEach(opt => {
             const div = document.createElement('div');
             div.className = `month-option ${opt.months === 1 ? 'selected' : ''}`;
-            div.onclick = () => selectMonth(opt.months, price, discount);
+            div.onclick = (e) => selectMonth(opt.months, price, discount, e);
             div.innerHTML = `
                 <div class="mo-count">${opt.months}</div>
                 <div class="mo-label">${opt.label}</div>
@@ -640,20 +461,18 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         updateTotal(1, price, discount);
     }
 
-    function selectMonth(months, price, discount) {
+    function selectMonth(months, price, discount, e) {
         selectedMonths = months;
         document.querySelectorAll('.month-option').forEach(el => el.classList.remove('selected'));
-        event.currentTarget.classList.add('selected');
+        e.currentTarget.classList.add('selected');
         updateTotal(months, price, discount);
     }
 
     function updateTotal(months, price, discount) {
         let total = price * months;
         const note = document.getElementById('discountNote');
-        if (discount > 0 && months >= 1) {
-            note.textContent = `Referral discount: -₹${discount}`;
-            total -= discount;
-        } else { note.textContent = ''; }
+        if (discount > 0) { note.textContent = `Referral discount: -₹${discount}`; total -= discount; }
+        else { note.textContent = ''; }
         document.getElementById('totalAmount').textContent = `₹${Math.max(0, total)}`;
     }
 
@@ -664,12 +483,10 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
             });
             const data = await res.json();
             const list = document.getElementById('paymentsList');
-
             if (!data.payments || data.payments.length === 0) {
                 list.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No payments yet</p></div>';
                 return;
             }
-
             list.innerHTML = data.payments.map(p => `
                 <div class="payment-item">
                     <div class="pay-left">
@@ -689,11 +506,9 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         } catch(e) { /* silent */ }
     }
 
-    // ===== PAYMENT =====
     async function initiatePayment() {
         const btn = document.getElementById('payNowBtn');
         btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating order...';
-
         try {
             const res = await fetch(`${API}/api/payments/create-order`, {
                 method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${authToken}` },
@@ -701,29 +516,20 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
             });
             const order = await res.json();
             if (!res.ok) throw new Error(order.error);
-
             const rzp = new Razorpay({
-                key: order.keyId,
-                amount: order.amount,
-                currency: 'INR',
-                name: 'Star Fiber',
-                description: `${selectedMonths} Month Plan Renewal`,
+                key: order.keyId, amount: order.amount, currency: 'INR',
+                name: 'Star Fiber', description: `${selectedMonths} Month Plan Renewal`,
                 order_id: order.orderId,
                 prefill: { name: customerData.name, contact: customerData.mobile },
                 theme: { color: '#0066ff' },
                 handler: async function(response) {
-                    // Verify payment
                     const vRes = await fetch(`${API}/api/payments/verify`, {
                         method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${authToken}` },
                         body: JSON.stringify({ ...response, months: selectedMonths })
                     });
                     const vData = await vRes.json();
-                    if (vRes.ok) {
-                        showToast('✅ Payment successful! Plan renewed.', 'success');
-                        setTimeout(() => loadDashboard(), 1500);
-                    } else {
-                        showToast(vData.error || 'Verification failed. Contact support.', 'error');
-                    }
+                    if (vRes.ok) { showToast('✅ Payment successful! Plan renewed.', 'success'); setTimeout(() => loadDashboard(), 1500); }
+                    else { showToast(vData.error || 'Verification failed. Contact support.', 'error'); }
                 },
                 modal: { ondismiss: () => { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay Securely with Razorpay'; } }
             });
@@ -734,10 +540,9 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         }
     }
 
-    // ===== REFERRAL =====
     function copyReferral() {
-        const code = document.getElementById('refCode').textContent;
-        navigator.clipboard.writeText(code).then(() => showToast('Referral code copied!', 'success'));
+        navigator.clipboard.writeText(document.getElementById('refCode').textContent)
+            .then(() => showToast('Referral code copied!', 'success'));
     }
 
     async function applyReferral() {
@@ -753,24 +558,19 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
         } catch(e) { showToast('Failed to apply code', 'error'); }
     }
 
-    // ===== TABS =====
     function switchTab(tab) {
         document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-            const tabs = ['renew','payments','referral'];
-            btn.classList.toggle('active', tabs[i] === tab);
+            btn.classList.toggle('active', ['renew','payments','referral'][i] === tab);
         });
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
         document.getElementById(`tab-${tab}`).classList.add('active');
     }
 
-    // ===== TOAST =====
     function showToast(msg, type = 'success') {
-        const container = document.getElementById('toastContainer');
         const toast = document.createElement('div');
-        const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
         toast.className = `toast ${type}`;
-        toast.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
-        container.appendChild(toast);
+        toast.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i> ${msg}`;
+        document.getElementById('toastContainer').appendChild(toast);
         setTimeout(() => toast.remove(), 4000);
     }
     </script>
