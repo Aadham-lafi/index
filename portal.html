@@ -283,12 +283,12 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
             <div id="step1" class="glass-panel login-card">
                 <div class="portal-icon"><i class="fas fa-wifi"></i></div>
                 <h2>Customer <span class="highlight">Portal</span></h2>
-                <p>Enter your registered mobile number to login</p>
-                <input type="tel" id="mobileInput" class="portal-input" placeholder="Mobile Number (e.g. 9876543210)" maxlength="10">
+                <p>Enter your registered email address to login</p>
+                <input type="email" id="emailInput" class="portal-input" placeholder="Your Email Address (e.g. name@gmail.com)">
                 <button class="portal-btn" id="sendOtpBtn" onclick="sendOTP()">
                     <i class="fas fa-paper-plane"></i> Send OTP
                 </button>
-                <p class="otp-note">OTP will be sent via SMS to your registered number</p>
+                <p class="otp-note">OTP will be sent to your Email inbox</p>
                 <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
                     <p style="color: var(--text-muted); font-size: 0.85rem;">New customer? <a href="index.html#contact" style="color: var(--primary-color);">Contact us to register →</a></p>
                 </div>
@@ -298,13 +298,13 @@ const SUPABASE_ANON_KEY ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
             <div id="step2" class="glass-panel login-card hidden">
                 <div class="portal-icon"><i class="fas fa-shield-alt"></i></div>
                 <h2>Verify <span class="highlight">OTP</span></h2>
-                <p id="otpSentMsg">OTP sent to your mobile</p>
+                <p id="otpSentMsg">OTP sent to your email</p>
                 <input type="number" id="otpInput" class="portal-input" placeholder="Enter 6-digit OTP" maxlength="6" style="font-size:1.4rem; letter-spacing: 8px; text-align:center;">
                 <button class="portal-btn" id="verifyOtpBtn" onclick="verifyOTP()">
                     <i class="fas fa-check-circle"></i> Verify & Login
                 </button>
                 <button class="portal-btn outline" onclick="goBack()">
-                    <i class="fas fa-arrow-left"></i> Change Number
+                    <i class="fas fa-arrow-left"></i> Change Email
                 </button>
                 <p class="otp-note">Resend OTP in <span class="otp-timer" id="timerDisplay">60s</span></p>
                 <button id="resendBtn" class="hidden" onclick="resendOTP()" style="background:none;border:none;color:var(--primary-color);cursor:pointer;font-size:0.9rem;margin-top:8px;">Resend OTP</button>
