@@ -1,103 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account | Star Fiber</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .portal-wrapper { min-height: 100vh; padding-top: 100px; padding-bottom: 60px; }
-        .login-card { max-width: 440px; margin: 60px auto; padding: 48px 40px; text-align: center; }
-        .login-card .portal-icon { width: 72px; height: 72px; background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 1.8rem; color: #000; }
-        .login-card h2 { font-size: 1.8rem; margin-bottom: 8px; }
-        .login-card p { color: var(--text-muted); margin-bottom: 32px; font-size: 0.95rem; }
-        .portal-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 12px; padding: 14px 18px; color: #fff; font-size: 1rem; font-family: var(--font-body); margin-bottom: 16px; transition: border-color 0.3s; outline: none; }
-        .portal-input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(0,243,255,0.1); }
-        .portal-input::placeholder { color: var(--text-muted); }
-        .portal-btn { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; font-family: var(--font-heading); cursor: pointer; transition: all 0.3s; background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); color: #000; margin-bottom: 12px; }
-        .portal-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,243,255,0.3); }
-        .portal-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .portal-btn.outline { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); }
-        .portal-btn.outline:hover { background: rgba(0,243,255,0.1); color: #fff; }
-        .otp-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 8px; }
-        .otp-timer { color: var(--primary-color); font-weight: 600; }
-        .dashboard-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; max-width: 1100px; margin: 0 auto; }
-        @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
-        .plan-card { padding: 32px; text-align: center; position: relative; }
-        .plan-card .avatar { width: 64px; height: 64px; background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.5rem; color: #000; }
-        .plan-card .customer-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 4px; }
-        .plan-card .customer-mobile { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-        .plan-info-box { background: rgba(0,102,255,0.08); border: 1px solid rgba(0,102,255,0.2); border-radius: 14px; padding: 20px; margin-bottom: 20px; }
-        .plan-speed-display { font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
-        .plan-name-display { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
-        .plan-price-display { font-size: 1.5rem; font-weight: 700; margin-top: 10px; }
-        .plan-price-display span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
-        .status-pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; }
-        .status-pill.active { background: rgba(37,211,102,0.12); color: #25D366; border: 1px solid rgba(37,211,102,0.25); }
-        .status-pill.expired { background: rgba(255,68,68,0.12); color: #ff4444; border: 1px solid rgba(255,68,68,0.25); }
-        .status-pill.warning { background: rgba(255,165,0,0.12); color: orange; border: 1px solid rgba(255,165,0,0.25); }
-        .due-section { margin-bottom: 20px; }
-        .due-label { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 6px; }
-        .due-date-big { font-size: 1.1rem; font-weight: 600; }
-        .days-bar-wrap { margin-top: 8px; }
-        .days-bar-bg { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
-        .days-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
-        .days-bar-fill.good { background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); }
-        .days-bar-fill.warn { background: linear-gradient(90deg, orange, #ffcc00); }
-        .days-bar-fill.danger { background: linear-gradient(90deg, #ff4444, #ff8800); }
-        .days-remaining-text { font-size: 0.82rem; color: var(--text-muted); margin-top: 5px; text-align: right; }
-        .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab-btn { padding: 8px 20px; border-radius: 30px; border: 1px solid var(--glass-border); background: transparent; color: var(--text-muted); font-family: var(--font-body); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: all 0.3s; }
-        .tab-btn.active { background: linear-gradient(90deg, var(--secondary-color), var(--primary-color)); border-color: transparent; color: #000; font-weight: 700; }
-        .tab-btn:hover:not(.active) { border-color: var(--primary-color); color: #fff; }
-        .tab-panel { display: none; }
-        .tab-panel.active { display: block; }
-        .renew-card { padding: 28px; }
-        .renew-card h3 { font-size: 1.2rem; margin-bottom: 20px; }
-        .months-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-        .month-option { padding: 16px 10px; text-align: center; border-radius: 12px; border: 1px solid var(--glass-border); cursor: pointer; transition: all 0.3s; }
-        .month-option:hover { border-color: var(--primary-color); }
-        .month-option.selected { border-color: var(--primary-color); background: rgba(0,243,255,0.08); }
-        .month-option .mo-count { font-size: 1.4rem; font-weight: 700; }
-        .month-option .mo-label { font-size: 0.75rem; color: var(--text-muted); }
-        .month-option .mo-price { font-size: 0.9rem; color: var(--primary-color); font-weight: 600; margin-top: 4px; }
-        .month-option .mo-save { font-size: 0.7rem; color: #25D366; }
-        .total-box { background: rgba(0,102,255,0.08); border: 1px solid rgba(0,102,255,0.2); border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .total-box .label { color: var(--text-muted); font-size: 0.9rem; }
-        .total-box .amount { font-size: 1.6rem; font-weight: 700; color: var(--primary-color); }
-        .payment-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--glass-border); }
-        .payment-item:last-child { border-bottom: none; }
-        .pay-left { display: flex; align-items: center; gap: 14px; }
-        .pay-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(37,211,102,0.1); display: flex; align-items: center; justify-content: center; color: #25D366; font-size: 1rem; }
-        .pay-title { font-weight: 600; font-size: 0.95rem; }
-        .pay-date { font-size: 0.8rem; color: var(--text-muted); }
-        .pay-amount { font-weight: 700; color: #25D366; }
-        .pay-id { font-size: 0.75rem; color: var(--text-muted); }
-        .referral-code-box { background: linear-gradient(135deg, rgba(0,102,255,0.1), rgba(0,243,255,0.1)); border: 1px solid rgba(0,243,255,0.2); border-radius: 14px; padding: 24px; text-align: center; margin-bottom: 20px; }
-        .ref-code { font-size: 2rem; font-weight: 800; letter-spacing: 4px; color: var(--primary-color); }
-        .ref-subtitle { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; }
-        .copy-btn { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 30px; border: 1px solid var(--primary-color); background: transparent; color: var(--primary-color); font-size: 0.85rem; cursor: pointer; transition: all 0.3s; margin-top: 12px; font-family: var(--font-body); }
-        .copy-btn:hover { background: rgba(0,243,255,0.1); }
-        .ref-apply-section { margin-top: 24px; }
-        .ref-apply-section h4 { font-size: 1rem; margin-bottom: 12px; }
-        .ref-input-group { display: flex; gap: 10px; }
-        .ref-input-group input { flex: 1; }
-        .toast-container { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 9999; }
-        .toast { background: rgba(10,15,30,0.95); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); border-radius: 12px; padding: 14px 24px; color: #fff; font-weight: 500; display: flex; align-items: center; gap: 10px; animation: slideUp 0.3s ease; margin-top: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-        .toast.success { border-color: rgba(37,211,102,0.4); }
-        .toast.error { border-color: rgba(255,68,68,0.4); }
-        .toast i { font-size: 1.1rem; }
-        .toast.success i { color: #25D366; }
-        .toast.error i { color: #ff4444; }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .empty-state { text-align: center; padding: 48px 24px; color: var(--text-muted); }
-        .empty-state i { font-size: 3rem; opacity: 0.3; margin-bottom: 16px; display: block; }
-        .hidden { display: none !important; }
-    </style>
+    <link rel="stylesheet" href="portal.css">
 </head>
+
 <body>
     <canvas id="particles-js"></canvas>
 
@@ -132,7 +48,8 @@
                 </button>
                 <p class="otp-note">OTP will be sent to your Email inbox</p>
                 <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--glass-border);">
-                    <p style="color: var(--text-muted); font-size: 0.85rem;">New customer? <a href="index.html#contact" style="color: var(--primary-color);">Contact us to register →</a></p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">New customer? <a href="index.html#contact"
+                            style="color: var(--primary-color);">Contact us to register →</a></p>
                 </div>
             </div>
 
@@ -141,7 +58,8 @@
                 <div class="portal-icon"><i class="fas fa-shield-alt"></i></div>
                 <h2>Verify <span class="highlight">OTP</span></h2>
                 <p id="otpSentMsg">OTP sent to your email</p>
-                <input type="number" id="otpInput" class="portal-input" placeholder="Enter 6-digit OTP" maxlength="6" style="font-size:1.4rem; letter-spacing: 8px; text-align:center;">
+                <input type="number" id="otpInput" class="portal-input" placeholder="Enter 6-digit OTP" maxlength="6"
+                    style="font-size:1.4rem; letter-spacing: 8px; text-align:center;">
                 <button class="portal-btn" id="verifyOtpBtn" onclick="verifyOTP()">
                     <i class="fas fa-check-circle"></i> Verify & Login
                 </button>
@@ -149,7 +67,9 @@
                     <i class="fas fa-arrow-left"></i> Change Email
                 </button>
                 <p class="otp-note">Resend OTP in <span class="otp-timer" id="timerDisplay">60s</span></p>
-                <button id="resendBtn" class="hidden" onclick="resendOTP()" style="background:none;border:none;color:var(--primary-color);cursor:pointer;font-size:0.9rem;margin-top:8px;">Resend OTP</button>
+                <button id="resendBtn" class="hidden" onclick="resendOTP()"
+                    style="background:none;border:none;color:var(--primary-color);cursor:pointer;font-size:0.9rem;margin-top:8px;">Resend
+                    OTP</button>
             </div>
         </div>
 
@@ -203,10 +123,14 @@
                     <!-- RENEW TAB -->
                     <div id="tab-renew" class="tab-panel active glass-panel renew-card">
                         <h3>Renew Your Plan</h3>
-                        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Select number of months to renew:</p>
+                        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Select number of months
+                            to renew:</p>
                         <div class="months-grid" id="monthsGrid"></div>
                         <div class="total-box">
-                            <div><div class="label">Total Amount</div><div style="font-size:0.8rem;color:var(--text-muted)" id="discountNote"></div></div>
+                            <div>
+                                <div class="label">Total Amount</div>
+                                <div style="font-size:0.8rem;color:var(--text-muted)" id="discountNote"></div>
+                            </div>
                             <div class="amount" id="totalAmount">₹0</div>
                         </div>
                         <button class="portal-btn" id="payNowBtn" onclick="initiatePayment()">
@@ -221,37 +145,46 @@
                     <div id="tab-payments" class="tab-panel glass-panel" style="padding:28px;">
                         <h3 style="margin-bottom:20px;">Payment History</h3>
                         <div id="paymentsList">
-                            <div class="empty-state"><i class="fas fa-receipt"></i><p>Loading...</p></div>
+                            <div class="empty-state"><i class="fas fa-receipt"></i>
+                                <p>Loading...</p>
+                            </div>
                         </div>
                     </div>
 
                     <!-- REFERRAL TAB -->
                     <div id="tab-referral" class="tab-panel glass-panel" style="padding:28px;">
                         <h3 style="margin-bottom:8px;">Refer & Earn</h3>
-                        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Share your code — both you & your friend get ₹100 off!</p>
+                        <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Share your code — both
+                            you & your friend get ₹100 off!</p>
                         <div class="referral-code-box">
-                            <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px;">YOUR REFERRAL CODE</div>
+                            <div style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px;">YOUR REFERRAL CODE
+                            </div>
                             <div class="ref-code" id="refCode">------</div>
                             <div class="ref-subtitle">Share with friends to get ₹100 discount on next renewal</div>
                             <button class="copy-btn" onclick="copyReferral()">
                                 <i class="fas fa-copy"></i> Copy Code
                             </button>
                         </div>
-                        <div style="background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);border-radius:12px;padding:16px;margin-bottom:20px;">
+                        <div
+                            style="background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.15);border-radius:12px;padding:16px;margin-bottom:20px;">
                             <div style="display:flex;gap:12px;align-items:flex-start;">
                                 <i class="fas fa-users" style="color:#25D366;font-size:1.2rem;margin-top:2px;"></i>
                                 <div>
                                     <div style="font-weight:600;margin-bottom:4px;">Your Referrals</div>
-                                    <div style="color:var(--text-muted);font-size:0.9rem;"><span id="refCount">0</span> friends joined through your code</div>
+                                    <div style="color:var(--text-muted);font-size:0.9rem;"><span id="refCount">0</span>
+                                        friends joined through your code</div>
                                 </div>
                             </div>
                         </div>
                         <div class="ref-apply-section">
                             <h4>Have a referral code?</h4>
-                            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:14px;">Apply a friend's code to get ₹100 off your next renewal</p>
+                            <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:14px;">Apply a friend's
+                                code to get ₹100 off your next renewal</p>
                             <div class="ref-input-group">
-                                <input type="text" id="applyRefCode" class="portal-input" placeholder="Enter referral code" style="margin-bottom:0;text-transform:uppercase;">
-                                <button class="portal-btn" style="width:auto;padding:14px 20px;margin-bottom:0;" onclick="applyReferral()">Apply</button>
+                                <input type="text" id="applyRefCode" class="portal-input"
+                                    placeholder="Enter referral code" style="margin-bottom:0;text-transform:uppercase;">
+                                <button class="portal-btn" style="width:auto;padding:14px 20px;margin-bottom:0;"
+                                    onclick="applyReferral()">Apply</button>
                             </div>
                         </div>
                     </div>
@@ -269,231 +202,231 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="script.js"></script>
     <script>
-    const API = 'https://starfiber-backend.railway.app'; // ← Railway deploy ஆனதும் update பண்ணுங்க
-    let authToken = localStorage.getItem('sf_token');
-    let customerData = null;
-    let selectedMonths = 1;
-    let otpTimer = null;
+        const API = 'https://starfiber-backend.railway.app'; // ← Railway deploy ஆனதும் update பண்ணுங்க
+        let authToken = localStorage.getItem('sf_token');
+        let customerData = null;
+        let selectedMonths = 1;
+        let otpTimer = null;
 
-    document.addEventListener('DOMContentLoaded', () => {
-        if (authToken) loadDashboard();
+        document.addEventListener('DOMContentLoaded', () => {
+            if (authToken) loadDashboard();
 
-        // ✅ FIX 1: emailInput (mobileInput இல்லை)
-        document.getElementById('emailInput').addEventListener('keypress', e => { if(e.key==='Enter') sendOTP(); });
-        document.getElementById('otpInput').addEventListener('keypress', e => { if(e.key==='Enter') verifyOTP(); });
-        document.getElementById('otpInput').addEventListener('input', e => {
-            e.target.value = e.target.value.replace(/[^0-9]/g,'').slice(0,6);
-        });
-    });
-
-    // ✅ FIX 2: sendOTP — email use பண்றோம்
-    async function sendOTP() {
-        const email = document.getElementById('emailInput').value.trim();
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            showToast('Valid email address enter பண்ணுங்க', 'error'); return;
-        }
-
-        const btn = document.getElementById('sendOtpBtn');
-        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-
-        try {
-            const res = await fetch(`${API}/api/auth/send-otp`, {
-                method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ email })
+            // ✅ FIX 1: emailInput (mobileInput இல்லை)
+            document.getElementById('emailInput').addEventListener('keypress', e => { if (e.key === 'Enter') sendOTP(); });
+            document.getElementById('otpInput').addEventListener('keypress', e => { if (e.key === 'Enter') verifyOTP(); });
+            document.getElementById('otpInput').addEventListener('input', e => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 6);
             });
-            const data = await res.json();
-            if (res.ok) {
-                document.getElementById('step1').classList.add('hidden');
-                document.getElementById('step2').classList.remove('hidden');
-                // Mask email: name@gmail.com → na***@gmail.com
-                const [user, domain] = email.split('@');
-                document.getElementById('otpSentMsg').textContent = `OTP sent to ${user.slice(0,2)}***@${domain}`;
-                startTimer();
-                showToast('OTP sent! Check your email inbox 📧', 'success');
-            } else {
-                showToast(data.error || 'Failed to send OTP', 'error');
+        });
+
+        // ✅ FIX 2: sendOTP — email use பண்றோம்
+        async function sendOTP() {
+            const email = document.getElementById('emailInput').value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showToast('Valid email address enter பண்ணுங்க', 'error'); return;
+            }
+
+            const btn = document.getElementById('sendOtpBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            try {
+                const res = await fetch(`${API}/api/auth/send-otp`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    document.getElementById('step1').classList.add('hidden');
+                    document.getElementById('step2').classList.remove('hidden');
+                    // Mask email: name@gmail.com → na***@gmail.com
+                    const [user, domain] = email.split('@');
+                    document.getElementById('otpSentMsg').textContent = `OTP sent to ${user.slice(0, 2)}***@${domain}`;
+                    startTimer();
+                    showToast('OTP sent! Check your email inbox 📧', 'success');
+                } else {
+                    showToast(data.error || 'Failed to send OTP', 'error');
+                    btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
+                }
+            } catch (e) {
+                showToast('Server offline. Please try WhatsApp support.', 'error');
                 btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
             }
-        } catch(e) {
-            showToast('Server offline. Please try WhatsApp support.', 'error');
-            btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
         }
-    }
 
-    // ✅ FIX 3: verifyOTP — email use பண்றோம்
-    async function verifyOTP() {
-        const email = document.getElementById('emailInput').value.trim();
-        const otp = document.getElementById('otpInput').value.trim();
-        if (otp.length !== 6) { showToast('6-digit OTP enter பண்ணுங்க', 'error'); return; }
+        // ✅ FIX 3: verifyOTP — email use பண்றோம்
+        async function verifyOTP() {
+            const email = document.getElementById('emailInput').value.trim();
+            const otp = document.getElementById('otpInput').value.trim();
+            if (otp.length !== 6) { showToast('6-digit OTP enter பண்ணுங்க', 'error'); return; }
 
-        const btn = document.getElementById('verifyOtpBtn');
-        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+            const btn = document.getElementById('verifyOtpBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
 
-        try {
-            const res = await fetch(`${API}/api/auth/verify-otp`, {
-                method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ email, otp })
-            });
-            const data = await res.json();
-            if (res.ok) {
-                localStorage.setItem('sf_token', data.token);
-                authToken = data.token;
-                clearInterval(otpTimer);
-                showToast(`Welcome back, ${data.customer.name}! 👋`, 'success');
-                loadDashboard();
-            } else {
-                showToast(data.error || 'Invalid OTP', 'error');
+            try {
+                const res = await fetch(`${API}/api/auth/verify-otp`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, otp })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem('sf_token', data.token);
+                    authToken = data.token;
+                    clearInterval(otpTimer);
+                    showToast(`Welcome back, ${data.customer.name}! 👋`, 'success');
+                    loadDashboard();
+                } else {
+                    showToast(data.error || 'Invalid OTP', 'error');
+                    btn.disabled = false; btn.innerHTML = '<i class="fas fa-check-circle"></i> Verify & Login';
+                }
+            } catch (e) {
+                showToast('Server error. Please try again.', 'error');
                 btn.disabled = false; btn.innerHTML = '<i class="fas fa-check-circle"></i> Verify & Login';
             }
-        } catch(e) {
-            showToast('Server error. Please try again.', 'error');
-            btn.disabled = false; btn.innerHTML = '<i class="fas fa-check-circle"></i> Verify & Login';
         }
-    }
 
-    function goBack() {
-        document.getElementById('step2').classList.add('hidden');
-        document.getElementById('step1').classList.remove('hidden');
-        document.getElementById('sendOtpBtn').disabled = false;
-        document.getElementById('sendOtpBtn').innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
-        clearInterval(otpTimer);
-    }
+        function goBack() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+            document.getElementById('sendOtpBtn').disabled = false;
+            document.getElementById('sendOtpBtn').innerHTML = '<i class="fas fa-paper-plane"></i> Send OTP';
+            clearInterval(otpTimer);
+        }
 
-    async function resendOTP() {
-        document.getElementById('resendBtn').classList.add('hidden');
-        await sendOTP();
-    }
+        async function resendOTP() {
+            document.getElementById('resendBtn').classList.add('hidden');
+            await sendOTP();
+        }
 
-    function startTimer() {
-        let seconds = 60;
-        document.getElementById('timerDisplay').textContent = `${seconds}s`;
-        document.getElementById('resendBtn').classList.add('hidden');
-        otpTimer = setInterval(() => {
-            seconds--;
+        function startTimer() {
+            let seconds = 60;
             document.getElementById('timerDisplay').textContent = `${seconds}s`;
-            if (seconds <= 0) {
-                clearInterval(otpTimer);
-                document.getElementById('resendBtn').classList.remove('hidden');
-            }
-        }, 1000);
-    }
-
-    // ✅ FIX 4: logout — emailInput clear பண்றோம்
-    function logout() {
-        localStorage.removeItem('sf_token');
-        authToken = null; customerData = null;
-        document.getElementById('dashboardSection').classList.add('hidden');
-        document.getElementById('loginSection').classList.remove('hidden');
-        document.getElementById('step1').classList.remove('hidden');
-        document.getElementById('step2').classList.add('hidden');
-        document.getElementById('emailInput').value = '';
-        document.getElementById('otpInput').value = '';
-        showToast('Logged out successfully', 'success');
-    }
-
-    async function loadDashboard() {
-        try {
-            const res = await fetch(`${API}/api/customer/profile`, {
-                headers: { 'Authorization': `Bearer ${authToken}` }
-            });
-            if (res.status === 401) { logout(); return; }
-            const data = await res.json();
-            customerData = data.customer;
-
-            document.getElementById('loginSection').classList.add('hidden');
-            document.getElementById('dashboardSection').classList.remove('hidden');
-
-            document.getElementById('d-name').textContent = customerData.name;
-            document.getElementById('d-mobile').textContent = customerData.email || customerData.mobile;
-            document.getElementById('d-speed').textContent = customerData.plan_speed || '--';
-            document.getElementById('d-plan-name').textContent = customerData.plan_name || '--';
-            document.getElementById('d-price').innerHTML = `₹${customerData.plan_price} <span>/month</span>`;
-            document.getElementById('d-due-date').textContent = new Date(customerData.due_date).toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'});
-            document.getElementById('d-status-msg').textContent = customerData.statusMessage || '';
-            document.getElementById('refCode').textContent = customerData.referral_code || '------';
-            document.getElementById('refCount').textContent = customerData.referral_count || 0;
-
-            const daysLeft = parseInt(customerData.days_remaining);
-            const pill = document.getElementById('d-status-pill');
-            const pillText = document.getElementById('d-status-text');
-            if (customerData.status === 'expired') {
-                pill.className = 'status-pill expired'; pillText.textContent = 'Expired';
-            } else if (daysLeft <= 3) {
-                pill.className = 'status-pill warning'; pillText.textContent = `Expires in ${daysLeft} day(s)`;
-            } else {
-                pill.className = 'status-pill active'; pillText.textContent = 'Active';
-            }
-
-            const bar = document.getElementById('d-days-bar');
-            bar.style.width = `${Math.min(100, (daysLeft / 30) * 100)}%`;
-            bar.className = `days-bar-fill ${daysLeft > 10 ? 'good' : daysLeft > 3 ? 'warn' : 'danger'}`;
-            document.getElementById('d-days-text').textContent = `${daysLeft} days remaining`;
-
-            buildMonthsGrid(customerData.plan_price, customerData.referral_discount);
-            loadPayments();
-        } catch(e) {
-            showToast('Failed to load profile. Please login again.', 'error');
-            logout();
+            document.getElementById('resendBtn').classList.add('hidden');
+            otpTimer = setInterval(() => {
+                seconds--;
+                document.getElementById('timerDisplay').textContent = `${seconds}s`;
+                if (seconds <= 0) {
+                    clearInterval(otpTimer);
+                    document.getElementById('resendBtn').classList.remove('hidden');
+                }
+            }, 1000);
         }
-    }
 
-    function buildMonthsGrid(price, discount) {
-        const grid = document.getElementById('monthsGrid');
-        const options = [
-            { months: 1, label: 'Month', save: 0 },
-            { months: 3, label: 'Months', save: 0 },
-            { months: 6, label: 'Months', save: Math.round(price * 0.05) },
-            { months: 12, label: 'Months', save: Math.round(price * 0.1) }
-        ];
-        grid.innerHTML = '';
-        options.forEach(opt => {
-            const div = document.createElement('div');
-            div.className = `month-option ${opt.months === 1 ? 'selected' : ''}`;
-            div.onclick = (e) => selectMonth(opt.months, price, discount, e);
-            div.innerHTML = `
+        // ✅ FIX 4: logout — emailInput clear பண்றோம்
+        function logout() {
+            localStorage.removeItem('sf_token');
+            authToken = null; customerData = null;
+            document.getElementById('dashboardSection').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('emailInput').value = '';
+            document.getElementById('otpInput').value = '';
+            showToast('Logged out successfully', 'success');
+        }
+
+        async function loadDashboard() {
+            try {
+                const res = await fetch(`${API}/api/customer/profile`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                if (res.status === 401) { logout(); return; }
+                const data = await res.json();
+                customerData = data.customer;
+
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('dashboardSection').classList.remove('hidden');
+
+                document.getElementById('d-name').textContent = customerData.name;
+                document.getElementById('d-mobile').textContent = customerData.email || customerData.mobile;
+                document.getElementById('d-speed').textContent = customerData.plan_speed || '--';
+                document.getElementById('d-plan-name').textContent = customerData.plan_name || '--';
+                document.getElementById('d-price').innerHTML = `₹${customerData.plan_price} <span>/month</span>`;
+                document.getElementById('d-due-date').textContent = new Date(customerData.due_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+                document.getElementById('d-status-msg').textContent = customerData.statusMessage || '';
+                document.getElementById('refCode').textContent = customerData.referral_code || '------';
+                document.getElementById('refCount').textContent = customerData.referral_count || 0;
+
+                const daysLeft = parseInt(customerData.days_remaining);
+                const pill = document.getElementById('d-status-pill');
+                const pillText = document.getElementById('d-status-text');
+                if (customerData.status === 'expired') {
+                    pill.className = 'status-pill expired'; pillText.textContent = 'Expired';
+                } else if (daysLeft <= 3) {
+                    pill.className = 'status-pill warning'; pillText.textContent = `Expires in ${daysLeft} day(s)`;
+                } else {
+                    pill.className = 'status-pill active'; pillText.textContent = 'Active';
+                }
+
+                const bar = document.getElementById('d-days-bar');
+                bar.style.width = `${Math.min(100, (daysLeft / 30) * 100)}%`;
+                bar.className = `days-bar-fill ${daysLeft > 10 ? 'good' : daysLeft > 3 ? 'warn' : 'danger'}`;
+                document.getElementById('d-days-text').textContent = `${daysLeft} days remaining`;
+
+                buildMonthsGrid(customerData.plan_price, customerData.referral_discount);
+                loadPayments();
+            } catch (e) {
+                showToast('Failed to load profile. Please login again.', 'error');
+                logout();
+            }
+        }
+
+        function buildMonthsGrid(price, discount) {
+            const grid = document.getElementById('monthsGrid');
+            const options = [
+                { months: 1, label: 'Month', save: 0 },
+                { months: 3, label: 'Months', save: 0 },
+                { months: 6, label: 'Months', save: Math.round(price * 0.05) },
+                { months: 12, label: 'Months', save: Math.round(price * 0.1) }
+            ];
+            grid.innerHTML = '';
+            options.forEach(opt => {
+                const div = document.createElement('div');
+                div.className = `month-option ${opt.months === 1 ? 'selected' : ''}`;
+                div.onclick = (e) => selectMonth(opt.months, price, discount, e);
+                div.innerHTML = `
                 <div class="mo-count">${opt.months}</div>
                 <div class="mo-label">${opt.label}</div>
                 <div class="mo-price">₹${(price * opt.months) - opt.save}</div>
                 ${opt.save > 0 ? `<div class="mo-save">Save ₹${opt.save}</div>` : ''}
             `;
-            grid.appendChild(div);
-        });
-        updateTotal(1, price, discount);
-    }
-
-    function selectMonth(months, price, discount, e) {
-        selectedMonths = months;
-        document.querySelectorAll('.month-option').forEach(el => el.classList.remove('selected'));
-        e.currentTarget.classList.add('selected');
-        updateTotal(months, price, discount);
-    }
-
-    function updateTotal(months, price, discount) {
-        let total = price * months;
-        const note = document.getElementById('discountNote');
-        if (discount > 0) { note.textContent = `Referral discount: -₹${discount}`; total -= discount; }
-        else { note.textContent = ''; }
-        document.getElementById('totalAmount').textContent = `₹${Math.max(0, total)}`;
-    }
-
-    async function loadPayments() {
-        try {
-            const res = await fetch(`${API}/api/customer/payments`, {
-                headers: { 'Authorization': `Bearer ${authToken}` }
+                grid.appendChild(div);
             });
-            const data = await res.json();
-            const list = document.getElementById('paymentsList');
-            if (!data.payments || data.payments.length === 0) {
-                list.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No payments yet</p></div>';
-                return;
-            }
-            list.innerHTML = data.payments.map(p => `
+            updateTotal(1, price, discount);
+        }
+
+        function selectMonth(months, price, discount, e) {
+            selectedMonths = months;
+            document.querySelectorAll('.month-option').forEach(el => el.classList.remove('selected'));
+            e.currentTarget.classList.add('selected');
+            updateTotal(months, price, discount);
+        }
+
+        function updateTotal(months, price, discount) {
+            let total = price * months;
+            const note = document.getElementById('discountNote');
+            if (discount > 0) { note.textContent = `Referral discount: -₹${discount}`; total -= discount; }
+            else { note.textContent = ''; }
+            document.getElementById('totalAmount').textContent = `₹${Math.max(0, total)}`;
+        }
+
+        async function loadPayments() {
+            try {
+                const res = await fetch(`${API}/api/customer/payments`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const data = await res.json();
+                const list = document.getElementById('paymentsList');
+                if (!data.payments || data.payments.length === 0) {
+                    list.innerHTML = '<div class="empty-state"><i class="fas fa-receipt"></i><p>No payments yet</p></div>';
+                    return;
+                }
+                list.innerHTML = data.payments.map(p => `
                 <div class="payment-item">
                     <div class="pay-left">
                         <div class="pay-icon"><i class="fas fa-check"></i></div>
                         <div>
                             <div class="pay-title">Plan Renewal – ${p.months} month(s)</div>
-                            <div class="pay-date">${new Date(p.payment_date).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'})}</div>
+                            <div class="pay-date">${new Date(p.payment_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
                             <div class="pay-id">${p.razorpay_payment_id || 'Manual'}</div>
                         </div>
                     </div>
@@ -503,76 +436,77 @@
                     </div>
                 </div>
             `).join('');
-        } catch(e) { /* silent */ }
-    }
-
-    async function initiatePayment() {
-        const btn = document.getElementById('payNowBtn');
-        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating order...';
-        try {
-            const res = await fetch(`${API}/api/payments/create-order`, {
-                method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${authToken}` },
-                body: JSON.stringify({ months: selectedMonths })
-            });
-            const order = await res.json();
-            if (!res.ok) throw new Error(order.error);
-            const rzp = new Razorpay({
-                key: order.keyId, amount: order.amount, currency: 'INR',
-                name: 'Star Fiber', description: `${selectedMonths} Month Plan Renewal`,
-                order_id: order.orderId,
-                prefill: { name: customerData.name, contact: customerData.mobile },
-                theme: { color: '#0066ff' },
-                handler: async function(response) {
-                    const vRes = await fetch(`${API}/api/payments/verify`, {
-                        method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${authToken}` },
-                        body: JSON.stringify({ ...response, months: selectedMonths })
-                    });
-                    const vData = await vRes.json();
-                    if (vRes.ok) { showToast('✅ Payment successful! Plan renewed.', 'success'); setTimeout(() => loadDashboard(), 1500); }
-                    else { showToast(vData.error || 'Verification failed. Contact support.', 'error'); }
-                },
-                modal: { ondismiss: () => { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay Securely with Razorpay'; } }
-            });
-            rzp.open();
-        } catch(e) {
-            showToast(e.message || 'Payment failed. Try again.', 'error');
-            btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay Securely with Razorpay';
+            } catch (e) { /* silent */ }
         }
-    }
 
-    function copyReferral() {
-        navigator.clipboard.writeText(document.getElementById('refCode').textContent)
-            .then(() => showToast('Referral code copied!', 'success'));
-    }
+        async function initiatePayment() {
+            const btn = document.getElementById('payNowBtn');
+            btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating order...';
+            try {
+                const res = await fetch(`${API}/api/payments/create-order`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+                    body: JSON.stringify({ months: selectedMonths })
+                });
+                const order = await res.json();
+                if (!res.ok) throw new Error(order.error);
+                const rzp = new Razorpay({
+                    key: order.keyId, amount: order.amount, currency: 'INR',
+                    name: 'Star Fiber', description: `${selectedMonths} Month Plan Renewal`,
+                    order_id: order.orderId,
+                    prefill: { name: customerData.name, contact: customerData.mobile },
+                    theme: { color: '#0066ff' },
+                    handler: async function (response) {
+                        const vRes = await fetch(`${API}/api/payments/verify`, {
+                            method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+                            body: JSON.stringify({ ...response, months: selectedMonths })
+                        });
+                        const vData = await vRes.json();
+                        if (vRes.ok) { showToast('✅ Payment successful! Plan renewed.', 'success'); setTimeout(() => loadDashboard(), 1500); }
+                        else { showToast(vData.error || 'Verification failed. Contact support.', 'error'); }
+                    },
+                    modal: { ondismiss: () => { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay Securely with Razorpay'; } }
+                });
+                rzp.open();
+            } catch (e) {
+                showToast(e.message || 'Payment failed. Try again.', 'error');
+                btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock"></i> Pay Securely with Razorpay';
+            }
+        }
 
-    async function applyReferral() {
-        const code = document.getElementById('applyRefCode').value.trim().toUpperCase();
-        if (!code) { showToast('Enter a referral code', 'error'); return; }
-        try {
-            const res = await fetch(`${API}/api/customer/referral`, {
-                method: 'POST', headers: { 'Content-Type':'application/json', 'Authorization': `Bearer ${authToken}` },
-                body: JSON.stringify({ referralCode: code })
+        function copyReferral() {
+            navigator.clipboard.writeText(document.getElementById('refCode').textContent)
+                .then(() => showToast('Referral code copied!', 'success'));
+        }
+
+        async function applyReferral() {
+            const code = document.getElementById('applyRefCode').value.trim().toUpperCase();
+            if (!code) { showToast('Enter a referral code', 'error'); return; }
+            try {
+                const res = await fetch(`${API}/api/customer/referral`, {
+                    method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${authToken}` },
+                    body: JSON.stringify({ referralCode: code })
+                });
+                const data = await res.json();
+                showToast(data.message || data.error, res.ok ? 'success' : 'error');
+            } catch (e) { showToast('Failed to apply code', 'error'); }
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', ['renew', 'payments', 'referral'][i] === tab);
             });
-            const data = await res.json();
-            showToast(data.message || data.error, res.ok ? 'success' : 'error');
-        } catch(e) { showToast('Failed to apply code', 'error'); }
-    }
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.getElementById(`tab-${tab}`).classList.add('active');
+        }
 
-    function switchTab(tab) {
-        document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-            btn.classList.toggle('active', ['renew','payments','referral'][i] === tab);
-        });
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById(`tab-${tab}`).classList.add('active');
-    }
-
-    function showToast(msg, type = 'success') {
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        toast.innerHTML = `<i class="fas ${type==='success'?'fa-check-circle':'fa-exclamation-circle'}"></i> ${msg}`;
-        document.getElementById('toastContainer').appendChild(toast);
-        setTimeout(() => toast.remove(), 4000);
-    }
+        function showToast(msg, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${msg}`;
+            document.getElementById('toastContainer').appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
     </script>
 </body>
+
 </html>
