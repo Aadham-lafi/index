@@ -2,9 +2,8 @@
 <html lang="en">
 
 <head>
-    <link rel="icon" type="image/jepg"
-     href="/logo-generator (9).jpg">   
-        <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="/logo-generator (9).jpg">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://starfiber.in/" />
     <meta name="description"
@@ -415,13 +414,16 @@
     <!-- Enterprise Section -->
     <section class="enterprise-section section-padding">
         <div class="container">
-            <div class="enterprise-banner glass-panel">
+            <div class="enterprise-banner glass-panel" style="text-align: center; position: relative; z-index: 10;">
                 <span class="badge" style="background: var(--primary-color); color: black;">FOR BUSINESS</span>
                 <h2 style="margin: 20px 0;">Need Dedicated <span class="text-gradient">1 Gbps Leased Line?</span></h2>
                 <p class="subheadline" style="margin-bottom: 30px;">Power your office with our Internet Leased Line
                     (ILL). Uncontended bandwidth, static IP, and priority SLA support.</p>
                 <div class="cta-group">
-                    <a href="tel:+917010034321" class="btn btn-primary glow-effect">Get Business Quote</a>
+                    <button type="button" class="btn btn-primary glow-effect" onclick="scrollToCallback()"
+                        style="position: relative; z-index: 9999; cursor: pointer; user-select: none; border: none;">
+                        Get Business Quote
+                    </button>
                 </div>
             </div>
         </div>
@@ -575,10 +577,10 @@
                     <div class="footer-col">
                         <h4>Plans</h4>
                         <ul>
-                            <li><a href="#">Home Broadband</a></li>
-                            <li><a href="#">Business Leased Line</a></li>
-                            <li><a href="#">Gamers Pack</a></li>
-                            <li><a href="#">OTT Add-ons</a></li>
+                            <li><a href="#pricing">Home Broadband</a></li>
+                            <li><a href="#contact">Business Leased Line</a></li>
+                            <li><a href="#pricing">Gamers Pack</a></li>
+                            <li><a href="#pricing">OTT Add-ons</a></li>
                         </ul>
                     </div>
                     <div class="footer-col">
@@ -604,12 +606,63 @@
         <i class="fab fa-whatsapp"></i>
     </a>
     <script src="script.js" defer></script>
+    <script>
+        function scrollToCallback() {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Highlight the contact form to draw attention
+                const formContainer = contactSection.querySelector('.contact-form-container');
+                if (formContainer) {
+                    formContainer.style.transition = 'box-shadow 0.3s ease, transform 0.3s ease';
+                    formContainer.style.boxShadow = '0 0 30px rgba(0, 255, 136, 0.6), 0 0 60px rgba(0, 255, 136, 0.3)';
+                    formContainer.style.transform = 'scale(1.03)';
+                    setTimeout(() => {
+                        formContainer.style.boxShadow = '';
+                        formContainer.style.transform = '';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Auto-fill area from coverage page redirect
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const area = params.get('area');
+            if (area) {
+                const select = document.querySelector('#leadForm select');
+                if (select) {
+                    // Check if option exists, if not add it
+                    let optionFound = false;
+                    for (let opt of select.options) {
+                        if (opt.value === area) {
+                            opt.selected = true;
+                            optionFound = true;
+                            break;
+                        }
+                    }
+                    if (!optionFound) {
+                        const newOpt = document.createElement('option');
+                        newOpt.value = area;
+                        newOpt.textContent = area;
+                        newOpt.selected = true;
+                        // Insert before "Other"
+                        const otherOpt = select.querySelector('option[value="Other"]');
+                        if (otherOpt) {
+                            select.insertBefore(newOpt, otherOpt);
+                        } else {
+                            select.appendChild(newOpt);
+                        }
+                    }
+                }
+                // Scroll to contact form with highlight
+                setTimeout(() => scrollToCallback(), 500);
+            }
+        });
+    </script>
 </body>
 
 </html>
-
-
-
 
 
 
