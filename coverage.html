@@ -113,6 +113,8 @@
                 filtered.forEach(loc => {
                     const card = document.createElement('div');
                     card.className = 'location-card glass-panel';
+                    card.style.cursor = 'pointer';
+                    card.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
                     const statusClass = loc.coverage >= 100 ? 'status-available' : 'status-check';
                     const statusText = loc.coverage >= 100 ? 'Available' : 'Filling Fast';
 
@@ -135,6 +137,22 @@
                         </div>
                         <div class="status-badge ${statusClass}">${statusText}</div>
                     `;
+
+                    // Click area card → go to home page Request Callback
+                    card.addEventListener('click', () => {
+                        window.location.href = 'index.html?area=' + encodeURIComponent(loc.name) + '#contact';
+                    });
+
+                    // Hover effect
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-5px)';
+                        card.style.boxShadow = '0 0 20px rgba(0, 255, 136, 0.3)';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = '';
+                        card.style.boxShadow = '';
+                    });
+
                     gridContainer.appendChild(card);
                 });
             }
