@@ -1,0 +1,666 @@
+/* ============================================
+   Star Fiber - Customer Portal Styles
+   Dark Blue + Electric Cyan + Glassmorphism
+   ============================================ */
+
+/* ===== PORTAL WRAPPER ===== */
+.portal-wrapper {
+    min-height: 100vh;
+    padding-top: 140px;
+    padding-bottom: 60px;
+    max-width: 1100px;
+}
+
+/* ===== LOGIN CARDS (Step 1 & Step 2) ===== */
+.login-card {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px 35px;
+    text-align: center;
+}
+
+.login-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.login-card p {
+    color: var(--text-muted);
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+}
+
+.portal-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 0 auto 20px;
+}
+
+/* ===== INPUTS & BUTTONS ===== */
+.portal-input {
+    width: 100%;
+    padding: 15px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    color: #fff;
+    font-family: var(--font-body);
+    margin-bottom: 18px;
+    transition: var(--transition);
+}
+
+.portal-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 243, 255, 0.1);
+}
+
+.portal-input::placeholder {
+    color: var(--text-muted);
+}
+
+.portal-btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.portal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+}
+
+.portal-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.portal-btn.outline {
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: none;
+}
+
+.portal-btn.outline:hover {
+    background: rgba(0, 243, 255, 0.08);
+    color: #fff;
+}
+
+.otp-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.otp-timer {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== DASHBOARD GRID ===== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* ===== PLAN CARD (Left Column) ===== */
+.plan-card {
+    padding: 35px 25px;
+    text-align: center;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(0, 102, 255, 0.15);
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin: 0 auto 15px;
+}
+
+.customer-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.customer-mobile {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+/* Status Pill */
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.status-pill.active {
+    background: rgba(37, 211, 102, 0.12);
+    color: #25D366;
+    border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+.status-pill.warning {
+    background: rgba(255, 165, 0, 0.12);
+    color: orange;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.status-pill.expired {
+    background: rgba(255, 68, 68, 0.12);
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+/* Plan Info Box */
+.plan-info-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.plan-speed-display {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.plan-name-display {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 4px 0 10px;
+}
+
+.plan-price-display {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.plan-price-display span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Due Date Section */
+.due-section {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.due-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.due-date-big {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.days-bar-wrap {
+    text-align: left;
+}
+
+.days-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.days-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s ease-out;
+}
+
+.days-bar-fill.good {
+    background: linear-gradient(90deg, #0066ff, #25D366);
+}
+
+.days-bar-fill.warn {
+    background: linear-gradient(90deg, #ff9800, orange);
+}
+
+.days-bar-fill.danger {
+    background: linear-gradient(90deg, #ff4444, #cc0000);
+}
+
+.days-remaining-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* ===== TABS ===== */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 14px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: var(--transition);
+    min-width: 100px;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.tab-btn.active {
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+    color: #000;
+    border-color: transparent;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.25);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RENEW TAB ===== */
+.renew-card {
+    padding: 28px;
+}
+
+.renew-card h3 {
+    margin-bottom: 6px;
+}
+
+.months-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.month-option {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 16px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.month-option:hover {
+    border-color: var(--primary-color);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+.month-option.selected {
+    border-color: var(--primary-color);
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+.mo-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.mo-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.mo-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.mo-save {
+    font-size: 0.7rem;
+    color: #25D366;
+    margin-top: 4px;
+}
+
+.total-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+}
+
+.total-box .label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.total-box .amount {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* ===== PAYMENTS TAB ===== */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+}
+
+.empty-state i {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    opacity: 0.5;
+    display: block;
+}
+
+.payment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.payment-item:last-child {
+    border-bottom: none;
+}
+
+.pay-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.pay-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.12);
+    color: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.pay-title {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.pay-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.pay-id {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    margin-top: 2px;
+}
+
+.pay-amount {
+    font-weight: 700;
+    color: #fff;
+    font-size: 1rem;
+}
+
+/* ===== REFERRAL TAB ===== */
+.referral-code-box {
+    text-align: center;
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px dashed var(--primary-color);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.ref-code {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: var(--primary-color);
+    margin: 8px 0;
+}
+
+.ref-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.copy-btn {
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.copy-btn:hover {
+    background: var(--primary-color);
+    color: #000;
+}
+
+.ref-apply-section h4 {
+    font-size: 1rem;
+    margin-bottom: 6px;
+}
+
+.ref-input-group {
+    display: flex;
+    gap: 10px;
+}
+
+.ref-input-group .portal-input {
+    margin-bottom: 0;
+}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+.toast-container {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    background: rgba(10, 15, 30, 0.95);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    min-width: 250px;
+    max-width: 350px;
+    animation: slideIn 0.3s ease, fadeOut 0.4s ease 3.6s forwards;
+}
+
+.toast.success {
+    border-left: 4px solid #25D366;
+}
+
+.toast.success i {
+    color: #25D366;
+}
+
+.toast.error {
+    border-left: 4px solid #ff4444;
+}
+
+.toast.error i {
+    color: #ff4444;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .portal-wrapper {
+        padding-top: 110px;
+    }
+
+    .login-card {
+        padding: 30px 22px;
+    }
+
+    .months-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        flex: 1 1 45%;
+    }
+
+    .ref-input-group {
+        flex-direction: column;
+    }
+
+    .toast-container {
+        top: auto;
+        bottom: 20px;
+        right: 12px;
+        left: 12px;
+    }
+
+    .toast {
+        max-width: 100%;
+    }
+}
