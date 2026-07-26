@@ -1,19 +1,16 @@
-
 /* 
    Star Fiber - Ultra Modern ISP Theme
-   Dark Blue + Electric Cyan + Glassmorphism
+   Pure Black + Rose Accent + Glassmorphism
 */
 :root {
-    --bg-color: #0a0f1e;
-    --bg-dark: #050810;
-    --primary-color: #00f3ff;
-    /* Electric Cyan */
-    --secondary-color: #0066ff;
-    /* Royal Blue */
+    --bg-color: #000000;
+    --bg-dark: #0a0a0a;
+    --primary-color: #f43f5e;
+    --secondary-color: #a855f7;
     --text-color: #ffffff;
-    --text-muted: #a0a8b8;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-muted: #cbd5e1;
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(244, 63, 94, 0.2);
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
     --transition: all 0.3s ease;
@@ -33,10 +30,10 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
-    /* Deep gradient background */
+    /* Dark Black Gradient with subtle accent glow */
     background-image:
-        radial-gradient(circle at 10% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 40%);
+        radial-gradient(circle at 10% 20%, rgba(244, 63, 94, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.08) 0%, transparent 40%);
 }
 
 a {
@@ -56,7 +53,7 @@ h4,
 h5,
 h6 {
     font-family: var(--font-heading);
-    color: #fff;
+    color: var(--text-color);
 }
 
 /* Utilities */
@@ -93,9 +90,10 @@ h6 {
 
 .btn-primary {
     background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
-    color: #000;
+    color: #ffffff;
+    font-weight: 700;
     border: none;
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
 }
 
 .btn-primary:hover {
@@ -138,16 +136,16 @@ h6 {
 /* Glassmorphism Classes */
 .glass-panel {
     background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .glass-header {
-    background: rgba(10, 15, 30, 0.85);
-    /* Slightly darker for header */
+    background: rgba(0, 0, 0, 0.9);
+    /* Pure Black Frosted header */
     backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
     position: fixed;
@@ -266,12 +264,65 @@ h6 {
 
 @keyframes glow {
     from {
-        box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
     }
 
     to {
-        box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+        box-shadow: 0 0 30px rgba(168, 85, 247, 0.7);
     }
+}
+
+/* 3D Hero Float Animation */
+@keyframes heroFloat {
+    0% {
+        transform: translateY(0px) rotateX(0deg);
+    }
+
+    50% {
+        transform: translateY(-18px) rotateX(2deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotateX(0deg);
+    }
+}
+
+.hero-3d-float {
+    animation: heroFloat 5s ease-in-out infinite;
+    transform-style: preserve-3d;
+}
+
+/* Glowing Orb Behind Hero */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.18) 0%, rgba(168, 85, 247, 0.1) 50%, transparent 70%);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: orbPulse 4s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+@keyframes orbPulse {
+    from {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
 }
 
 .pulse-anim {
@@ -281,17 +332,17 @@ h6 {
 @keyframes pulse {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7);
+        box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7);
     }
 
     70% {
         transform: scale(1.05);
-        box-shadow: 0 0 0 10px rgba(0, 102, 255, 0);
+        box-shadow: 0 0 0 10px rgba(244, 63, 94, 0);
     }
 
     100% {
         transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(0, 102, 255, 0);
+        box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
     }
 }
 
@@ -629,7 +680,7 @@ footer {
     background: transparent;
     padding: 0;
     font-size: 1.1rem;
-    color: white;
+    color: var(--text-color);
     width: 100%;
 }
 
@@ -648,8 +699,8 @@ footer {
     padding: 25px;
     border-radius: 15px;
     transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(10, 15, 30, 0.6);
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
 }
 
 .location-card:hover {
@@ -677,7 +728,7 @@ footer {
 .loc-info h4 {
     font-size: 1.1rem;
     margin-bottom: 5px;
-    color: white;
+    color: var(--text-color);
 }
 
 .loc-info p {
@@ -760,7 +811,7 @@ footer {
         top: 80px;
         left: 0;
         width: 100%;
-        background: rgba(10, 15, 30, 0.95);
+        background: rgba(255, 255, 255, 0.95);
         flex-direction: column;
         padding: 20px;
         text-align: center;
@@ -813,8 +864,15 @@ footer {
     }
 
     .about-image {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
         height: 250px !important;
         margin-top: 30px;
+    }
+
+    .about-image i {
+        font-size: 4.5rem !important;
     }
 
     .about-stats {
@@ -883,13 +941,13 @@ footer {
     padding: 15px;
     border: 1px solid var(--glass-border);
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.02);
+    background: var(--glass-bg);
 }
 
 .stat-number {
     font-size: 1.8rem;
     font-weight: 700;
-    color: white;
+    color: var(--text-color);
     display: block;
 }
 
@@ -938,7 +996,7 @@ footer {
 
 .user-details h4 {
     font-size: 1rem;
-    color: white;
+    color: var(--text-color);
 }
 
 .user-details span {
@@ -972,7 +1030,7 @@ footer {
 .footer-top {
     padding: 60px 0;
     border-top: 1px solid var(--glass-border);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .footer-grid {
@@ -983,7 +1041,7 @@ footer {
 
 .footer-col h4 {
     margin-bottom: 25px;
-    color: white;
+    color: var(--text-color);
     font-size: 1.2rem;
 }
 
@@ -1021,7 +1079,7 @@ footer {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    color: white;
+    color: var(--text-color);
     transition: all 0.3s;
 }
 
