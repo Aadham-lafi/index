@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" type="image/jpeg" href="/logo-generator (9).jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayboxTV OTT Plans | Star Fiber Erode – Stream 25+ Apps from ₹90/mo</title>
+    <!-- SEO Keywords -->
+    <meta name="description"
+        content="PlayboxTV OTT plans with Star Fiber. Stream Jio Hotstar, SonyLiv, Zee5, Amazon & 25+ apps. Plans from ₹90/mo. Monthly, Quarterly, Half Yearly & Yearly options.">
+    <meta name="keywords"
+        content="IPTV connection near me, IPTV service provider Erode, IPTV set top box connection, IPTV subscription India, best IPTV provider Tamil Nadu, IPTV channels list price, fiber internet with TV connection, broadband + OTT plans Erode, internet connection with free channels, Star Fiber plans Erode">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .pb-hero {
+            padding: 120px 0 60px;
+            text-align: center
+        }
+
+        .pb-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px
+        }
+
+        .pb-hero .subheadline {
+            max-width: 650px;
+            margin: 0 auto 30px
+        }
+
+        .pb-logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: var(--font-heading);
+            margin-bottom: 10px
+        }
+
+        .pb-logo span {
+            color: var(--primary-color)
+        }
+
+        /* Duration Tabs */
+        .duration-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 45px
+        }
+
+        .dur-tab {
+            padding: 12px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: var(--font-heading);
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            color: var(--text-muted);
+            transition: var(--transition);
+            font-size: .95rem
+        }
+
+        .dur-tab:hover {
+            border-color: var(--primary-color);
+            color: #fff
+        }
+
+        .dur-tab.active {
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 20px rgba(244, 63, 94, .35)
+        }
+
+        .dur-content {
+            display: none
+        }
+
+        .dur-content.active {
+            display: block
+        }
+
+        /* Plan Cards Grid */
+        .plans-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px
+        }
+
+        .pb-card {
+            border-radius: 20px;
+            padding: 30px 25px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(14px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden
+        }
+
+        .pb-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, .5)
+        }
+
+        .pb-card.featured {
+            border: 2px solid var(--secondary-color)
+        }
+
+        .pb-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 12px;
+            right: -30px;
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 4px 35px;
+            font-size: .7rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            letter-spacing: 1px
+        }
+
+        .pb-plan-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #fff;
+            font-family: var(--font-heading)
+        }
+
+        .pb-price {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 4px
+        }
+
+        .pb-price small {
+            font-size: .85rem;
+            color: var(--text-muted);
+            font-weight: 400
+        }
+
+        .pb-per {
+            font-size: .8rem;
+            color: var(--text-muted);
+            margin-bottom: 18px
+        }
+
+        .pb-channels {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px
+        }
+
+        .pb-channels li {
+            padding: 7px 0;
+            font-size: .85rem;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .pb-channels li i {
+            color: var(--primary-color);
+            font-size: .7rem;
+            min-width: 14px
+        }
+
+        .pb-channels li:last-child {
+            border-bottom: none
+        }
+
+        .pb-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-family: var(--font-heading);
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: .95rem
+        }
+
+        .pb-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(244, 63, 94, .4)
+        }
+
+        /* Color badges per plan */
+        .badge-hot {
+            background: rgba(255, 152, 0, .15);
+            color: #ff9800;
+            border: 1px solid rgba(255, 152, 0, .3);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px
+        }
+
+        .badge-plus {
+            background: rgba(76, 175, 80, .15);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, .3);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px
+        }
+
+        .badge-power {
+            background: rgba(33, 150, 243, .15);
+            color: #2196f3;
+            border: 1px solid rgba(33, 150, 243, .3);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px
+        }
+
+        .badge-play {
+            background: rgba(156, 39, 176, .15);
+            color: #ce93d8;
+            border: 1px solid rgba(156, 39, 176, .3);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px
+        }
+
+        .badge-powerplay {
+            background: rgba(244, 67, 54, .15);
+            color: #ef5350;
+            border: 1px solid rgba(244, 67, 54, .3);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px
+        }
+
+        .badge-prime {
+            background: rgba(255, 215, 0, .15);
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, .3);
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 10px
+        }
+
+        .channel-count {
+            background: rgba(255, 255, 255, .06);
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 18px;
+            font-size: .8rem;
+            color: var(--text-muted)
+        }
+
+        .channel-count strong {
+            color: #fff;
+            font-size: 1.1rem
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: .95rem
+        }
+
+        .back-link:hover {
+            color: #fff
+        }
+
+        @media(max-width:768px) {
+            .pb-hero h1 {
+                font-size: 2rem
+            }
+
+            .plans-row {
+                grid-template-columns: 1fr
+            }
+
+            .dur-tab {
+                padding: 10px 20px;
+                font-size: .85rem
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles-js"></canvas>
+
+    <!-- Navigation -->
+    <nav class="glass-header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Star<span class="highlight">Fiber</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="coverage.html">Coverage</a></li>
+                <li><a href="index.html#pricing">Plans</a></li>
+                <li><a href="playbox.html" class="active">PlayboxTV</a></li>
+                <li><a href="iptv.html">IPTV</a></li>
+                <li><a href="portal.html">My Account</a></li>
+            </ul>
+            <div style="display:flex;gap:10px;align-items:center;">
+                <a href="portal.html" class="btn btn-outline" style="padding:10px 20px;font-size:0.9rem;">
+                    <i class="fas fa-user-circle"></i> Login
+                </a>
+            </div>
+            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pb-hero">
+        <div class="container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <div class="pb-logo">Playbox<span>TV</span></div>
+            <h1>OTT Entertainment <span class="text-gradient">Plans</span></h1>
+            <p class="subheadline">Stream Jio Hotstar, SonyLiv, Zee5, Amazon & 25+ premium apps. Choose your perfect
+                plan with Star Fiber.</p>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="section-padding" style="padding-top:0">
+        <div class="container">
+            <!-- Duration Tabs -->
+            <div class="duration-tabs">
+                <div class="dur-tab active" data-dur="monthly">Monthly</div>
+                <div class="dur-tab" data-dur="quarterly">Quarterly</div>
+                <div class="dur-tab" data-dur="halfyearly">Half Yearly</div>
+                <div class="dur-tab" data-dur="yearly">Yearly</div>
+            </div>
+
+            <!-- MONTHLY -->
+            <div class="dur-content active" id="monthly">
+                <div class="plans-row" id="monthly-plans"></div>
+            </div>
+            <!-- QUARTERLY -->
+            <div class="dur-content" id="quarterly">
+                <div class="plans-row" id="quarterly-plans"></div>
+            </div>
+            <!-- HALF YEARLY -->
+            <div class="dur-content" id="halfyearly">
+                <div class="plans-row" id="halfyearly-plans"></div>
+            </div>
+            <!-- YEARLY -->
+            <div class="dur-content" id="yearly">
+                <div class="plans-row" id="yearly-plans"></div>
+            </div>
+
+            <!-- SEO Content Section -->
+            <div
+                style="font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); text-align: center; max-width: 800px; margin: 40px auto 10px;">
+                Searching for <strong>IPTV connection near me</strong> or the <strong>best IPTV provider Tamil
+                    Nadu</strong>? Star Fiber offers top-rated <strong>fiber internet with TV connection</strong>. If
+                you are an <strong>IPTV service provider Erode</strong> seeker, our <strong>broadband + OTT plans
+                    Erode</strong> feature the <strong>IPTV set top box connection</strong> you need. Compare our
+                <strong>IPTV channels list price</strong> for your <strong>IPTV subscription India</strong> today, and
+                enjoy an <strong>internet connection with free channels</strong> paired perfectly with <strong>Star
+                    Fiber plans Erode</strong>.
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-padding" style="background:rgba(0,0,0,.3)">
+        <div class="container" style="text-align:center">
+            <h2>Ready to Start <span class="text-gradient">Streaming?</span></h2>
+            <p class="subheadline" style="margin-top:15px">Get PlayboxTV with your Star Fiber broadband connection
+                today.</p>
+            <div class="cta-group" style="margin-top:30px">
+                <a href="index.html#contact" class="btn btn-primary btn-lg pulse-anim">🚀 Get Connection</a>
+                <a href="tel:+917010034321" class="btn btn-outline btn-lg"><i class="fas fa-phone-alt"></i> Call Now</a>
+                <a href="https://wa.me/917010034321" class="btn btn-whatsapp btn-lg"><i class="fab fa-whatsapp"></i>
+                    WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Star Fiber. All rights reserved. | <a href="index.html"
+                    style="color:var(--primary-color)">Home</a></p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/917010034321" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // Plan data
+        const plans = [
+            {
+                id: 'hot', name: 'Hot', badge: 'badge-hot',
+                channels: ['Jio Hotstar', 'Aha Tamil', 'Jio Saavn', 'Discovery Plus', 'Fancode', 'Raj Digital TV', 'Shemaroo', 'Hungama', 'ITap', 'Stage', 'OM TV', 'Kanncha Lannka', 'Chana Jor', 'Shucae Film', 'Dangal Play', 'Distro TV', 'Shorts TV', 'PlayboxTv Live'],
+                prices: { monthly: 90, quarterly: 270, halfyearly: 499, yearly: 900 }
+            },
+            {
+                id: 'plus', name: 'Plus', badge: 'badge-plus',
+                channels: ['Jio Hotstar', 'SonyLiv', 'Aha Tamil', 'Jio Saavn', 'Discovery Plus', 'Fancode', 'Raj Digital TV', 'Shemaroo', 'Hungama', 'OM TV', 'ITap', 'Stage', 'Kanccha Laanka', 'Chana Jor', 'Shucae Film', 'Dangal Play', 'AaoNxt', 'Hubhopper', 'PlayboxTv Live'],
+                prices: { monthly: 115, quarterly: 345, halfyearly: 690, yearly: 1150 }
+            },
+            {
+                id: 'power', name: 'Power', badge: 'badge-power',
+                channels: ['Jio Hotstar', 'SunNxt', 'Aha Tamil', 'Jio Saavn', 'Discovery Plus', 'Fancode', 'Raj Digital TV', 'Shemaroo', 'Hungama', 'OM TV', 'ITap', 'Stage', 'Kanncha Lannka', 'Chana Jor', 'Shucae Film', 'Dangal Play', 'Shorts TV', 'ETV Win', 'PlayboxTv Live'],
+                prices: { monthly: 125, quarterly: 375, halfyearly: 750, yearly: 1250 }
+            },
+            {
+                id: 'play', name: 'Play', badge: 'badge-play',
+                channels: ['Jio Hotstar', 'Zee5', 'SonyLiv', 'SunNxt', 'Aha Tamil', 'Jio Saavn', 'Discovery Plus', 'Raj Digital Plus', 'Fancode', 'OTT Plus', 'Shemaroo', 'Hungama', 'Travel XP', 'OM TV', 'ITap', 'Stage', 'NammaFlix', 'ETV Win', 'Kanccha Lannka', 'Chana Jor', 'Chaupal', 'AaoNxt', 'Hubhopper', 'Distro Tv', 'Shorts Tv', 'RunnTv', 'Shucae Film', 'Dangal Play', 'Waves', 'PlayboxTv Live'],
+                prices: { monthly: 130, quarterly: 390, halfyearly: 780, yearly: 1300 },
+                featured: true
+            },
+            {
+                id: 'powerplay', name: 'Powerplay', badge: 'badge-powerplay',
+                channels: ['Jio Hotstar', 'Zee5', 'SonyLiv', 'SunNxt', 'Aha Tamil', 'Jio Saavn', 'Discovery Plus', 'Raj Digital Plus', 'Fancode', 'OTT Plus', 'Shemaroo', 'Hungama', 'Travel XP', 'OM TV', 'ITap', 'Stage', 'NammaFlix', 'ETV Win', 'Kanccha Lannka', 'Chana Jor', 'Chaupal', 'AaoNxt', 'Hubhopper', 'Distro Tv', 'Shorts Tv', 'RunnTv', 'Shucae Film', 'Dangal Play', 'Waves', 'PlayboxTv Live'],
+                prices: { monthly: 150, quarterly: 450, halfyearly: 800, yearly: 1500 }
+            },
+            {
+                id: 'prime', name: 'Prime', badge: 'badge-prime',
+                channels: ['Amazon Lite', 'Jio Hotstar', 'Zee5', 'SonyLive', 'Sunnxt', 'Aha Tamil', 'Jio Saavn', 'Discovery Plus', 'Fancode', 'Jio Saavn', 'Shemaroo', 'Hungama', 'ITap', 'Stage', 'Kanncha Lanka', 'Chana Jor', 'Dangal Play', 'Distra Tv', 'Shorts Tv', 'Shucae Film', 'PlayboxTv Live'],
+                prices: { monthly: 199, quarterly: 597, halfyearly: 1099, yearly: 2199 }
+            }
+        ];
+
+        const durLabels = { monthly: 'mo', quarterly: '3 mo', halfyearly: '6 mo', yearly: 'yr' };
+
+        function renderPlans(dur) {
+            const container = document.getElementById(dur + '-plans');
+            if (container.children.length) return; // already rendered
+            plans.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'pb-card' + (p.featured ? ' featured' : '');
+                const chList = p.channels.map(c => `<li><i class="fas fa-check-circle"></i>${c}</li>`).join('');
+                card.innerHTML = `
+      <span class="${p.badge}">${p.name}</span>
+      <div class="pb-plan-name">${p.name}</div>
+      <div class="pb-price">₹${p.prices[dur]} <small>/${durLabels[dur]}</small></div>
+      <div class="channel-count"><strong>${p.channels.length}</strong> Apps & Channels</div>
+      <ul class="pb-channels">${chList}</ul>
+      <a href="https://wa.me/917010034321?text=Hi! I'm interested in PlayboxTV ${p.name} plan (₹${p.prices[dur]}/${durLabels[dur]})" class="pb-btn" target="_blank">Get This Plan</a>
+    `;
+                container.appendChild(card);
+            });
+        }
+
+        // Tab switching
+        document.querySelectorAll('.dur-tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.dur-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.dur-content').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+                const dur = this.dataset.dur;
+                document.getElementById(dur).classList.add('active');
+                renderPlans(dur);
+            });
+        });
+
+        // Initial render
+        renderPlans('monthly');
+
+        // Particles
+        const c = document.getElementById('particles-js'), ctx = c.getContext('2d');
+        c.width = window.innerWidth; c.height = window.innerHeight;
+        const pts = Array.from({ length: 60 }, () => ({ x: Math.random() * c.width, y: Math.random() * c.height, vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5, r: Math.random() * 2 + 1 }));
+        function draw() { ctx.clearRect(0, 0, c.width, c.height); pts.forEach(p => { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > c.width) p.vx *= -1; if (p.y < 0 || p.y > c.height) p.vy *= -1; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = 'rgba(244,63,94,0.3)'; ctx.fill() }); requestAnimationFrame(draw) }
+        draw();
+        window.addEventListener('resize', () => { c.width = innerWidth; c.height = innerHeight });
+
+        // Mobile toggle
+        document.querySelector('.mobile-toggle')?.addEventListener('click', () => { document.querySelector('.nav-links')?.classList.toggle('active') });
+    </script>
+</body>
+
+</html>
