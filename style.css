@@ -833,8 +833,26 @@ footer {
         font-size: 2.5rem;
     }
 
+    .badge {
+        white-space: normal;
+        display: inline-block;
+        max-width: 95%;
+        line-height: 1.5;
+        font-size: 0.8rem;
+    }
+
     .cta-group {
         flex-direction: column;
+        gap: 15px;
+        padding: 0 10%;
+    }
+
+    .cta-group .btn {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
     }
 
     .coverage-grid,
