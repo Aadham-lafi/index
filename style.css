@@ -770,7 +770,6 @@ footer {
 }
 
 .status-badge {
-    display: inline-block;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -927,6 +926,17 @@ footer {
 .about-text p {
     margin-bottom: 20px;
     color: var(--text-muted);
+}
+
+.about-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+}
+
+.about-image i {
+    font-size: 8rem;
 }
 
 .about-stats {
